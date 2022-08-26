@@ -12,18 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fuel.orderservice.model.Order;
 import com.fuel.orderservice.service.OrderService;
+import com.fuel.orderservice.service.Producer;
 
 @RestController
 public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	Producer producer;
 
 	@PostMapping("/orders")
-	public Order addOrder(@RequestBody Order order) {
+	public Order addOrder(@RequestBody Order o) {
 		
-		Order o = orderService.addOrder(order);
-		return o;
+		Order order = orderService.addOrder(o);
+		producer.publishToAllocationTopic(order);
+		return order;
 	}
 	
 	@GetMapping("/orders/{id}")
