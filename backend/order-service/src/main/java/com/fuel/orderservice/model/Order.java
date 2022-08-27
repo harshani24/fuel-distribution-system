@@ -26,22 +26,18 @@ public class Order {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime allocatedTime;
 	
-	
 	private boolean sheduled;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime scheduledTime;
-	
 	
 	private boolean dispatched;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dispatchedTime;
 	
-	
 	private boolean completed;
 	//@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime completedTime;
-	
 	
 	private String status;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

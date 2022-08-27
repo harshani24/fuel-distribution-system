@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService{
 		LocalDateTime time = LocalDateTime.now() ;
 	
 		order.setCompleted(true);
-		order.setCompletedTime(time);		
+		order.setCompletedTime(time);
 		
 		order.setStatus("completed");
 		order.setStatusTime(time);
