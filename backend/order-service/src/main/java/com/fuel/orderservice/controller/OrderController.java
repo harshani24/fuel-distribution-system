@@ -24,26 +24,33 @@ public class OrderController {
 	Producer producer;
 
 	@PostMapping("/orders")
-	public Order addOrder(@RequestBody Order o) {
-		
+	public Order addOrder(@RequestBody Order o) {	
 		Order order = orderService.addOrder(o);
-		producer.publishToAllocationTopic(order);
+		//producer.publishToAllocationTopic(order);
 		return order;
 	}
 	
 	@GetMapping("/orders/{id}")
-	public Order getOrderStatus(@PathVariable String id) {
-		
-		return null;
+	public Order getOrder(@PathVariable String id) {
+		Order order = orderService.getOrder(id);
+		return order;
 	}
 	
 	@GetMapping("/orders")
-	public List<Order> viewallOrders() {
-		return null;
+	public List<Order> viewAllOrders() {
+		List<Order> orders = orderService.viewAllOrders();
+		return orders;
 	}
 	
-	@PutMapping("/orders/{id}")
+	@GetMapping("/orders/status/{id}")
+	public String getOrderStatus(@PathVariable String id) {
+		String status = orderService.getOrderStatus(id);
+		return status;
+	}
+	
+	@PutMapping("/orders/receivedConfirm/{id}")
 	public String  receivedConfirm(@PathVariable String id) {
-		return null;	
+		String result = orderService.receivedConfirm(id);
+		return result;		
 	}
 }

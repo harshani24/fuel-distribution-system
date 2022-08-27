@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -21,15 +23,30 @@ public class Order {
 	private int quantity;
 	
 	private boolean allocated;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime allocatedTime;
+	
+	
 	private boolean sheduled;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime scheduledTime;
+	
+	
 	private boolean dispatched;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dispatchedTime;
+	
+	
 	private boolean completed;
+	//@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime completedTime;
 	
+	
 	private String status;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime statusTime;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDateTime statusDate;
 
 }
