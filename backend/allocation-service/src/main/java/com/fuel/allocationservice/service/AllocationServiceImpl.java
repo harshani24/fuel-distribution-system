@@ -25,28 +25,73 @@ public class AllocationServiceImpl implements AllocationService{
 
 	@Override
 	public Stock addStock(int octane92, int octane95, int autoDiesel, int superDiesel) {
-		List<Stock> stock1 = getLastStockRecord();
-		System.out.println(stock1);
+		Stock stock = getLastStockRecord();
 		
-		Stock stock = new Stock();
+		//Very First One
+		if(stock == null) {
+			Stock initialStock = new Stock();
+			
+			initialStock.setOrderId("00000");
+			initialStock.setDate(LocalDate.now());
+			initialStock.setTime(LocalTime.now());
+			initialStock.setDateTime(LocalDateTime.now());
+			
+			initialStock.setAvailableOcatane92(octane92);
+			initialStock.setAvailableOcatane95(octane95);
+			initialStock.setAvailableAutoDiesel(autoDiesel);
+			initialStock.setAvailableSuperDiesel(superDiesel);
+			
+			allocationRepository.save(initialStock);
+			
+			
+			return  initialStock;
+		}
 		
-		stock.setOrderId("00000");
-		stock.setDate(LocalDate.now());
-		stock.setTime(LocalTime.now());
-		stock.setDateTime(LocalDateTime.now());
-		
-		
-		
-		allocationRepository.save(stock);
-		
-		return stock;
-		
+		//Add a new stock to available stocks
+		else {
+			Stock newStock = stock.clone();
+			newStock.setOrderId("00000");
+			newStock.setDate(LocalDate.now());
+			newStock.setTime(LocalTime.now());
+			newStock.setDateTime(LocalDateTime.now());
+			
+			newStock.setAvailableOcatane92(stock.getAvailableOcatane92()+octane92);
+			newStock.setAvailableOcatane95(stock.getAvailableOcatane95()+octane95);
+			newStock.setAvailableAutoDiesel(stock.getAvailableAutoDiesel()+autoDiesel);
+			newStock.setAvailableSuperDiesel(stock.getAvailableSuperDiesel()+superDiesel);
+			
+			allocationRepository.save(newStock);
+			
+			return newStock;
+		}	
+
 	}
 
-	public List<Stock> getLastStockRecord() {
-		return allocationRepository.findAllByOrderByDateAsc();
+	public Stock getLastStockRecord() {
+	  Stock stock = allocationRepository.findFirstByOrderByDateTimeDesc();
+	  
+	  if(stock == null) {
+		  return null;
+	  }
+	  
+	  else {
+		  return stock;
+	  }
 	}
 
+//	@Override
+//	public List<Stock> findAllDateAsc() {
+//	   // return allocationRepository.findAllByOrderByDateTimeAsc();
+//		return allocationRepository.findAllByOrderByDateTimeDesc();
+//	}
+	
+	
+	@Override
+	public List<Stock> findAllDateAsc() {
+
+		//return allocationRepository.findFirstByOrderByDateTimeAsc();
+		return allocationRepository.findAllByOrderByDateTimeDesc();
+	}
 
 	
 }

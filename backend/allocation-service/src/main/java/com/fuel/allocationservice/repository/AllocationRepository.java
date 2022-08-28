@@ -8,6 +8,12 @@ import com.fuel.allocationservice.model.Stock;
 
 public interface AllocationRepository extends MongoRepository<Stock, String>{
 
-	List<Stock> findAllByOrderByDateAsc();
+	List<Stock> findAllByOrderByDateTimeAsc();
+	
+	List<Stock> findAllByOrderByDateTimeDesc();
+	
+	Stock findFirstByOrderByDateTimeDesc();
+	
+	List<Stock> findTop5ByOrderByDateTimeDesc();
 
 }
