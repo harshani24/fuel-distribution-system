@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fuel.allocationservice.model.Stock;
 import com.fuel.allocationservice.service.AllocationService;
+import com.fuel.orderservice.model.Order;
 
 @RestController
 public class AllocationController {
@@ -23,5 +24,12 @@ public class AllocationController {
 	
 	public Stock addStock(int octane92, int octane95, int autoDiesel , int superDiesel) {
 		return allocationService.addStock(octane92, octane95, autoDiesel, superDiesel);
+	}
+
+	public void orderAllocation(Order order) {
+		System.out.println(order.getId() + " " + order.getPassport());
+		
+		System.out.println(allocationService.orderAllocation(order));
+		
 	}
 }

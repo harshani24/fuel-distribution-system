@@ -30,7 +30,9 @@ public class OrderServiceImpl implements OrderService{
 	
     //generate id for the order
 	private String generateID(Order order) {
-		String id = order.getPassport() + UUID.randomUUID().toString().substring(0, 5);
+//		String id = order.getPassport() + UUID.randomUUID().toString().substring(0, 5);
+    	String id =order.getPassport();
+		
 		return id;
 	}
 

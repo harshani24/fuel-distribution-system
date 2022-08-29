@@ -15,5 +15,9 @@ public interface AllocationRepository extends MongoRepository<Stock, String>{
 	Stock findFirstByOrderByDateTimeDesc();
 	
 	List<Stock> findTop5ByOrderByDateTimeDesc();
+	
+	
+	
+	Stock findByOrderId(String orderId);
 
 }
