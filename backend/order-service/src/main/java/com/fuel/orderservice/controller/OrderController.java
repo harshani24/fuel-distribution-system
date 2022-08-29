@@ -26,7 +26,7 @@ public class OrderController {
 	@PostMapping("/orders")
 	public Order addOrder(@RequestBody Order o) {	
 		Order order = orderService.addOrder(o);
-		//producer.publishToAllocationTopic(order);
+		producer.publishToAllocationTopic(order);
 		return order;
 	}
 	

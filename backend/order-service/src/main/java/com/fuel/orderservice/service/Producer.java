@@ -17,6 +17,7 @@ public class Producer {
 	
 	public void publishToAllocationTopic(Order order) {
 		kafkaTemplate.send(topic, order);
+		System.out.println("Publish order to allocation topic from order service " + order);
 		OrderserviceApplication.logger.info("OrderService:: Publish Order("+ order.getId()+ ") to Allocation Topic");
 	}
 

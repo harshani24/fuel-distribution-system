@@ -1,5 +1,7 @@
 package com.fuel.allocationservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,8 @@ public class AllocationserviceApplication {
 	@Autowired
 	AllocationController allocationController;
 	
+	public static final Logger logger = LoggerFactory.getLogger(AllocationserviceApplication.class);
+	
 	public static void main(String[] args) {
 		SpringApplication.run(AllocationserviceApplication.class, args);
 	}
@@ -22,7 +26,7 @@ public class AllocationserviceApplication {
 	public void EventListenerExecute() {
 		System.out.println("Application Ready Event is successfully Started");
 		
-		allocationController.addStock(60000,60000,60000,60000);
+		allocationController.addStock(20000,20000,20000,2000);
 	}
 
 }
