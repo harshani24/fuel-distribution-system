@@ -19,8 +19,20 @@ public class Order {
 	@Indexed(unique = true)
 	private String passport;
 	private String station;
-	private String fuelType;
-	private int quantity;
+//	private String fuelType;
+//	private int quantity;
+	
+	private boolean octane92;
+	private int quantityOctane92;
+	
+	private boolean octane95;
+	private int quantityOctane95;
+	
+	private boolean autoDiesel;
+	private int quantityAutoDiesel;
+	
+	private boolean superDiesel;
+	private int quantitySuperDiesel;
 	
 	private boolean allocated;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
