@@ -1,6 +1,8 @@
 package com.fuel.allocationservice.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +98,23 @@ public class AllocationServiceImpl implements AllocationService{
 
 	@Override
 	public String orderAllocation(Order order) {
-		LocalDateTime currentDateTime = LocalDateTime.now();
+		
+		List<String> requiredFuelList = checkAllOrdersForAllocationList(order);
+		HashMap<String,Integer> requiredFuelMap = checkAllOrdersForAllocationMap(order);
+		System.out.println(requiredFuelList);
+		System.out.println(requiredFuelMap);
+		
+		
+		
+		//Last Record Available Quantities
+		Stock lastStockRecord = getLastStockRecord();
+		
+		int lastOctane92Quantity = lastStockRecord.getAvailableOcatane92();
+		int lastOctane95Quantity = lastStockRecord.getAvailableOcatane92();
+		int lastAutoDieselQuantity = lastStockRecord.getAvailableOcatane92();
+		int lastSuperDieselQuantity = lastStockRecord.getAvailableOcatane92();
+		
+		//New order Quantities
 		int octane92Quantity = order.getQuantityOctane92();
 		int octane95Quantity = order.getQuantityOctane95();
 		int autoDieselQuantity = order.getQuantityAutoDiesel();
@@ -107,6 +125,10 @@ public class AllocationServiceImpl implements AllocationService{
 		boolean isAutoDiesel = order.isAutoDiesel();
 		boolean isSuperDiesel = order.isSuperDiesel();
 		
+		
+		
+		
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		//-----------------------------------------------1.OderAllocation Table-------------------------------------------------
 		OrderAllocation newOrder = new OrderAllocation();
 			
@@ -156,13 +178,13 @@ public class AllocationServiceImpl implements AllocationService{
 		
 		//------------------------------------------------2.Stock Table---------------------------------------------------------
 		OrderAllocation addedOrderRecord = addedOrderRecord(order.getId());
-		Stock lastStockRecord = getLastStockRecord();
+		//Stock lastStockRecord = getLastStockRecord();
 		Stock newStockRecord = lastStockRecord.clone();
 		
-		int lastOctane92Quantity = lastStockRecord.getAvailableOcatane92();
-		int lastOctane95Quantity = lastStockRecord.getAvailableOcatane92();
-		int lastAutoDieselQuantity = lastStockRecord.getAvailableOcatane92();
-		int lastSuperDieselQuantity = lastStockRecord.getAvailableOcatane92();
+//		int lastOctane92Quantity = lastStockRecord.getAvailableOcatane92();
+//		int lastOctane95Quantity = lastStockRecord.getAvailableOcatane92();
+//		int lastAutoDieselQuantity = lastStockRecord.getAvailableOcatane92();
+//		int lastSuperDieselQuantity = lastStockRecord.getAvailableOcatane92();
 		
 		if(addedOrderRecord != null) {
 			newStockRecord.setOrderId(addedOrderRecord.getOrderId());
@@ -212,6 +234,63 @@ public class AllocationServiceImpl implements AllocationService{
 		}
 		return null;
 	
+	}
+	
+    public HashMap<String,Integer> checkAllOrdersForAllocationMap(Order order) {
+		
+		boolean isOctane92 = order.isOctane92();
+		boolean isOctane95 = order.isOctane95();
+		boolean isAutoDiesel = order.isAutoDiesel();
+		boolean isSuperDiesel = order.isSuperDiesel();
+		
+		HashMap<String,Integer> orderTypesMap  = new HashMap<String,Integer>();
+
+		if(isOctane92) {
+			orderTypesMap.put("octane92Quantity" , order.getQuantityOctane92());
+		}
+		
+		if(isOctane95) {
+			orderTypesMap.put("octane95Quantity" , order.getQuantityOctane95());
+		}
+		
+        if(isAutoDiesel) {
+        	orderTypesMap.put("autoDieselQuantity" , order.getQuantityAutoDiesel());
+		}
+        
+        if(isSuperDiesel) {
+        	orderTypesMap.put("superDieselQuantity" , order.getQuantitySuperDiesel());
+		}	
+
+        return orderTypesMap;
+
+	}
+
+	public List<String> checkAllOrdersForAllocationList(Order order) {
+		
+		boolean isOctane92 = order.isOctane92();
+		boolean isOctane95 = order.isOctane95();
+		boolean isAutoDiesel = order.isAutoDiesel();
+		boolean isSuperDiesel = order.isSuperDiesel();
+		
+		List<String> orderTypes  = new ArrayList<String>();		
+		
+		if(isOctane92) {
+			orderTypes.add("octane92");
+		}
+		
+		if(isOctane95) {
+			orderTypes.add("octane95");
+		}
+		
+        if(isAutoDiesel) {
+        	orderTypes.add("autoDiesel");
+		}
+	
+        if(isSuperDiesel) {
+        	orderTypes.add("superDiesel");
+		}
+		
+        return orderTypes;
 	}
 	
 	public OrderAllocation addedOrderRecord(String id) {
