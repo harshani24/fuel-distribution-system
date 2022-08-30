@@ -8,4 +8,6 @@ import com.fuel.allocationservice.model.Stock;
 public interface OrderAllocationRepository extends MongoRepository<OrderAllocation, String>{
 
 	OrderAllocation findByOrderId(String orderId);
+	
+	OrderAllocation findTopByOrderByDateTimeDesc();
 }
