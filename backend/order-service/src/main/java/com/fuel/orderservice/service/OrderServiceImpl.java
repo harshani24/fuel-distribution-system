@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService{
 	//get one order
 	public Order getOrder(String id) {
 		Optional<Order> order = orderRepository.findById(id);
-		
+	
 		if(order.isPresent()) {
 		 return order.get();
 		}
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 	//get order status
 	public String getOrderStatus(String id) {
 	Optional<Order> order = orderRepository.findById(id);
-		
+	
 		if(order.isPresent()) {
 		 return order.get().getStatus();
 		}

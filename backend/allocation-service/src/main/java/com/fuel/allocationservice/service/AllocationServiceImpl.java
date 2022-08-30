@@ -4,26 +4,27 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.fuel.allocationservice.model.OrderAllocation;
 import com.fuel.allocationservice.model.Stock;
-import com.fuel.allocationservice.repository.AllocationRepository;
+import com.fuel.allocationservice.repository.OrderAllocationRepository;
+import com.fuel.allocationservice.repository.StockAllocationRepository;
 import com.fuel.orderservice.model.Order;
 
-//import static org.springframework.data.mongodb.core.query.Criteria.*;
-//import static org.springframework.data.mongodb.core.query.Query.*;
-
-//import org.springframework.data.mongodb.core.query.Query;
 
 @Service
 public class AllocationServiceImpl implements AllocationService{
 	
 	@Autowired
-	AllocationRepository allocationRepository;
+	StockAllocationRepository stockAllocationRepository;
+	
+	@Autowired
+	OrderAllocationRepository orderAllocationRepository;
 
 	@Override
 	public Stock addStock(int octane92, int octane95, int autoDiesel, int superDiesel) {
+		
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		Stock stock = getLastStockRecord();
@@ -33,6 +34,7 @@ public class AllocationServiceImpl implements AllocationService{
 			Stock initialStock = new Stock();
 			
 			initialStock.setOrderId("00000");
+			initialStock.setOrderAllocationId("none");
 			initialStock.setDate(currentDateTime);
 			initialStock.setTime(currentDateTime);
 			initialStock.setDateTime(currentDateTime);
@@ -42,8 +44,12 @@ public class AllocationServiceImpl implements AllocationService{
 			initialStock.setAvailableAutoDiesel(autoDiesel);
 			initialStock.setAvailableSuperDiesel(superDiesel);
 			
-			allocationRepository.save(initialStock);
+			initialStock.setStatusOcatane92("stocked");
+			initialStock.setStatusOcatane95("stocked");
+			initialStock.setStatusAutoDiesel("stocked");
+			initialStock.setStatusSuperDiesel("stocked");
 			
+			stockAllocationRepository.save(initialStock);
 			
 			return  initialStock;
 		}
@@ -51,7 +57,10 @@ public class AllocationServiceImpl implements AllocationService{
 		//Add a new stock to available stocks
 		else {
 			Stock newStock = stock.clone();
+			
 			newStock.setOrderId("00000");
+			newStock.setOrderAllocationId("none");
+
 			newStock.setDate(currentDateTime);
 			newStock.setTime(currentDateTime);
 			newStock.setDateTime(currentDateTime);
@@ -61,69 +70,21 @@ public class AllocationServiceImpl implements AllocationService{
 			newStock.setAvailableAutoDiesel(stock.getAvailableAutoDiesel()+autoDiesel);
 			newStock.setAvailableSuperDiesel(stock.getAvailableSuperDiesel()+superDiesel);
 			
-			allocationRepository.save(newStock);
+			newStock.setStatusOcatane92("stocked");
+			newStock.setStatusOcatane95("stocked");
+			newStock.setStatusAutoDiesel("stocked");
+			newStock.setStatusSuperDiesel("stocked");
+			
+			stockAllocationRepository.save(newStock);
 			
 			return newStock;
 		}	
 
 	}
 	
-	@Override
-	public String orderAllocation(Order order) {
-		String fuelType = order.getFuelType();
-		int quantity = order.getQuantity();
-		
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		Stock newOrderAllocation = new Stock();
-		
-		
-		Stock stock = getLastStockRecord();
-		
-		System.out.println(fuelType +" " + stock);
-		
-		Boolean stockAvailableForRequest = getAvailabilityForRequestQuantity(fuelType, quantity , stock , newOrderAllocation);
-		
-	    System.out.println(stockAvailableForRequest);
-	    
-	    if(stockAvailableForRequest) {
-	    	newOrderAllocation.setOrderId(order.getId());
-	    	newOrderAllocation.setDate(currentDateTime);
-	    	newOrderAllocation.setTime(currentDateTime);
-	    	newOrderAllocation.setDateTime(currentDateTime);
-	    	
-	    	newOrderAllocation.setAvailableOcatane92(stock.getAvailableOcatane92());	 
-	    	newOrderAllocation.setAvailableOcatane95(stock.getAvailableOcatane95());
-	    	newOrderAllocation.setAvailableAutoDiesel(stock.getAvailableAutoDiesel());
-	    	newOrderAllocation.setAvailableSuperDiesel(stock.getAvailableSuperDiesel());
-	    	
-	    	
-	    	allocationRepository.save(newOrderAllocation);
-	    	
-	    	System.out.println(newOrderAllocation);
-	    	
-	    	return "Your ordered fuel quantity is successfully allocated";
-	    }
-	    
-	    else {
-	    	return "Sorry, your requested fuel quantity can't be allocated for now";
-	    }
-	}
-
 	public Stock getLastStockRecord() {
-	  Stock stock = allocationRepository.findFirstByOrderByDateTimeDesc();
-	  
-	  if(stock == null) {
-		  return null;
-	  }
-	  
-	  else {
-		  return stock;
-	  }
-	}
-	
-	public Stock getLastStockRecordForParticularOrderID(Order order) {
-		Stock stock = allocationRepository.findByOrderId(order.getId());
-		
+		  Stock stock = stockAllocationRepository.findFirstByOrderByDateTimeDesc();
+		  
 		  if(stock == null) {
 			  return null;
 		  }
@@ -131,74 +92,87 @@ public class AllocationServiceImpl implements AllocationService{
 		  else {
 			  return stock;
 		  }
-	}
-	
-	public boolean getAvailabilityForRequestQuantity(String fuelType ,int quantity, Stock stock , Stock newOrderAllocation) {
+		}
+
+	@Override
+	public String orderAllocation(Order order) {
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		boolean status = false;
-		
-		switch(fuelType) {
-		
-		case "OCTANE92": 
-			              if(stock.getAvailableOcatane92() >= quantity ) {
-			            	  status = true;
-			            	  newOrderAllocation.setAllocatedOcatane92(quantity);
-			              }
-			              
-			              else {
-			            	  status = false;
-			              }
-			              
-		case "OCTANE95": 
-				          if(stock.getAvailableOcatane95() >= quantity ) {
-				        	  status = true;
-				        	  newOrderAllocation.setAllocatedOcatane95(quantity);
-				          }	
-				          else {
-				        	  status = false;
-			              }
-				          
-		case "AUTO_DIESEL": 
-				          if(stock.getAvailableAutoDiesel() >= quantity ) {
-				        	  status = true;
-				        	  newOrderAllocation.setAllocatedAutoDiesel(quantity);
-				          }
-				          else {
-				        	  status = false;
-			              }
-				          
-		case "SUPER_DIESEL": 
-				          if(stock.getAvailableSuperDiesel() >= quantity ) {
-				        	  status = true;
-				        	  newOrderAllocation.setAllocatedSuperDiesel(quantity);
-				          }
-				          else {
-				        	  status = false;
-			              }
+		//-----------------------------------------------1.OderAllocation Table-------------------------------------------------
+		OrderAllocation newOrder = new OrderAllocation();
 			
-	   }
-		return status;
+		newOrder.setOrderId(order.getId());
+		newOrder.setDate(currentDateTime);
+		newOrder.setTime(currentDateTime);
+		newOrder.setDateTime(currentDateTime);
+		    
+		if(order.isOctane92()) {
+			  newOrder.setAllocatedOcatane92(order.getQuantityOctane92());
+			  newOrder.setStatusOcatane92("allocated");
+		 }
+		 else {
+			  newOrder.setStatusOcatane92("none");
+		 }
+		   
+		   
+		 if(order.isOctane95()) {
+			  newOrder.setAllocatedOcatane92(order.getQuantityOctane95());
+			  newOrder.setStatusOcatane92("allocated");
+		 }
+		 else {
+			  newOrder.setStatusOcatane92("none");
+		 }
+		   
+		   
+		 if(order.isAutoDiesel()) {
+			  newOrder.setAllocatedAutoDiesel(order.getQuantityAutoDiesel());
+			  newOrder.setStatusAutoDiesel("allocated");
+		 }
+		 else {
+			  newOrder.setStatusAutoDiesel("none");
+		 }
+		   
+		   
+		 if(order.isOctane92()) {
+			  newOrder.setAllocatedSuperDiesel(order.getQuantityOctane92());
+			  newOrder.setStatusSuperDiesel("allocated");
+		 }
+		 else {
+			  newOrder.setStatusSuperDiesel("none");
+		 }
+		 
+		 orderAllocationRepository.save(newOrder);
+		
+		 
+		
+		//------------------------------------------------2.Stock Table---------------------------------------------------------
+		
+		return null;
 	
 	}
-
-//	@Override
-//	public List<Stock> findAllDateAsc() {
-//	   // return allocationRepository.findAllByOrderByDateTimeAsc();
-//		return allocationRepository.findAllByOrderByDateTimeDesc();
-//	}
 	
+		
+	public void getLastOrderAllocationRecord()
+	{
+		
+	}
+	
+
 	
 	@Override
-	public List<Stock> findAllDateAsc() {
-
-		//return allocationRepository.findFirstByOrderByDateTimeAsc();
-		return allocationRepository.findAllByOrderByDateTimeDesc();
+	public List<Stock> findAllStockDesc() {
+		
+		return stockAllocationRepository.findAllByOrderByDateTimeDesc();
 	}
 
-	
 	@Override
-	public Stock findStockByOrderID(Order order) {
-	
-		return allocationRepository.findByOrderId(order.getId());
+	public OrderAllocation findAllocationRecordByOrderID(Order order) {
+		String orderID = order.getId();
+		return orderAllocationRepository.findByOrderId(orderID);
 	}
+
+
+
+
+	
 }

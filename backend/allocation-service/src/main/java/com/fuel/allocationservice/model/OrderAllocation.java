@@ -11,15 +11,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-@Document("Stock")
-public class Stock{
+@Document("Order_Allocation")
+public class OrderAllocation{
 	
 	@Id
 	private String id;
 	
+	@Indexed(unique = true)
 	private String orderId;	
-	private String orderAllocationId;	
-	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime date;
 	@JsonFormat(pattern = "HH:mm:ss")
@@ -27,47 +26,39 @@ public class Stock{
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dateTime;
 	
-	private int availableOcatane92;
 	private int allocatedOcatane92;
 	private int dispatchedOcatane92;
 	private String statusOcatane92;
 	
-	private int availableOcatane95;
 	private int allocatedOcatane95;
 	private int dispatchedOcatane95;
 	private String statusOcatane95;
 	
-	private int availableAutoDiesel;
 	private int allocatedAutoDiesel;
 	private int dispatchedAutoDiesel;
 	private String statusAutoDiesel;
 	
-	private int availableSuperDiesel;
 	private int allocatedSuperDiesel;
 	private int dispatchedSuperDiesel;
 	private String statusSuperDiesel;
 	
-	
-
-	public Stock clone() {
-		Stock stock = new Stock();
+	public OrderAllocation clone() {
 		
-		stock.setAvailableOcatane92(availableOcatane92);
-		stock.setAllocatedOcatane92(allocatedOcatane92);
-		stock.setDispatchedOcatane92(dispatchedOcatane92);
-		
-		stock.setAvailableOcatane95(availableOcatane95);
-		stock.setAllocatedOcatane95(allocatedOcatane95);
-		stock.setDispatchedOcatane95(dispatchedOcatane95);
-		
-		stock.setAvailableAutoDiesel(availableAutoDiesel);
-		stock.setAllocatedAutoDiesel(allocatedAutoDiesel);
-		stock.setDispatchedAutoDiesel(dispatchedAutoDiesel);
-		
-		stock.setAvailableSuperDiesel(availableSuperDiesel);
-		stock.setAllocatedSuperDiesel(allocatedSuperDiesel);
-		stock.setDispatchedSuperDiesel(dispatchedSuperDiesel);
-		
-		return stock;
+	   OrderAllocation order = new OrderAllocation();
+	   
+	   order.setOrderId(orderId);
+	   
+	   order.setAllocatedOcatane92(allocatedOcatane92);
+	   order.setAllocatedOcatane95(allocatedOcatane95);
+	   order.setAllocatedAutoDiesel(allocatedAutoDiesel);
+	   order.setAllocatedSuperDiesel(allocatedSuperDiesel);
+	   
+	   order.setDispatchedOcatane92(dispatchedOcatane92);
+	   order.setDispatchedOcatane95(dispatchedOcatane95);
+	   order.setDispatchedAutoDiesel(dispatchedAutoDiesel);
+	   order.setDispatchedSuperDiesel(dispatchedSuperDiesel);
+	   
+	   return order;
 	}
+	
 }

@@ -6,18 +6,19 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.fuel.allocationservice.model.Stock;
 
-public interface AllocationRepository extends MongoRepository<Stock, String>{
+public interface StockAllocationRepository extends MongoRepository<Stock, String>{
 
-	List<Stock> findAllByOrderByDateTimeAsc();
+	//List<Stock> findAllByOrderByDateTimeAsc();
 	
 	List<Stock> findAllByOrderByDateTimeDesc();
 	
 	Stock findFirstByOrderByDateTimeDesc();
 	
-	List<Stock> findTop5ByOrderByDateTimeDesc();
+	//List<Stock> findTop5ByOrderByDateTimeDesc();
 	
 	
 	
-	Stock findByOrderId(String orderId);
+	
+	//Stock findByOrderId(String orderId);
 
 }

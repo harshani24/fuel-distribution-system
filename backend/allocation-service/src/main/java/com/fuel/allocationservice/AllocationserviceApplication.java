@@ -22,6 +22,7 @@ public class AllocationserviceApplication {
 		SpringApplication.run(AllocationserviceApplication.class, args);
 	}
 	
+	
 	@EventListener(ApplicationReadyEvent.class)
 	public void EventListenerExecute() {
 		System.out.println("Application Ready Event is successfully Started");

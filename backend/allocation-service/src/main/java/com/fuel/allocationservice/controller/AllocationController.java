@@ -18,9 +18,10 @@ public class AllocationController {
 	AllocationService allocationService;
 	
 	@RequestMapping("/")
-	public List<Stock> sayHi(String name) {
-		return allocationService.findAllDateAsc();
+	public List<Stock> findAllStockDesc() {
+		return allocationService.findAllStockDesc();
 	}
+	
 	
 	public Stock addStock(int octane92, int octane95, int autoDiesel , int superDiesel) {
 		return allocationService.addStock(octane92, octane95, autoDiesel, superDiesel);
