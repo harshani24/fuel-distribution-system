@@ -16,7 +16,7 @@ public class Consumer {
 	
 	@KafkaListener(topics= "allocation-topic", groupId = "allocation-group" )
 	public void readAllocationTopic(Order order) {
-		System.out.println("Listen to allocation topic from Allocation Service " + order);
+		System.out.println("Listen to allocation topic in AllocationService from OrderService " + order);
 		
 		allocationController.orderAllocation(order);	
 	}

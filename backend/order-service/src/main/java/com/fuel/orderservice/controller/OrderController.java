@@ -53,4 +53,14 @@ public class OrderController {
 		String result = orderService.receivedConfirm(id);
 		return result;		
 	}
+	
+	public void changeAllocationStatusToAllocate(Order currentOrder, String status) {
+		Order order = orderService.changeAllocationStatus(currentOrder, status);
+		producer.publishToScheduleTopic(order);
+	}
+
+	public void changeAllocationStatusToReject(Order currentOrder, String status) {
+		orderService.changeAllocationStatus(currentOrder, status);
+	}
+
 }

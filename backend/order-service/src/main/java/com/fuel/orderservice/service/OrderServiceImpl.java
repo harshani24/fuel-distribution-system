@@ -16,7 +16,8 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	OrderRepository orderRepository;
-
+	
+	
 	@Override
 	//create order id and save in db
 	public Order addOrder(Order order) {
@@ -31,7 +32,6 @@ public class OrderServiceImpl implements OrderService{
     //generate id for the order
 	private String generateID(Order order) {
 		String id = order.getPassport() + UUID.randomUUID().toString().substring(0, 5);
-//    	String id =order.getPassport();
 		
 		return id;
 	}
@@ -93,6 +93,43 @@ public class OrderServiceImpl implements OrderService{
 		orderRepository.save(order);
 		
 		return "Order Completed Successfully";
+	}
+
+	@Override
+	public Order changeAllocationStatus(Order currentOrder, String status) {
+		
+		Optional<Order> order = orderRepository.findById(currentOrder.getId());
+		
+		if(order.isPresent()) {
+			return updateStatusAllocation(currentOrder, status);
+		}
+		
+		return null;	
+	}
+
+	private Order updateStatusAllocation(Order order, String status) {
+	LocalDateTime currentDateTime = LocalDateTime.now();
+		
+		if(status.equals("allocated")) {
+			order.setAllocated(true);
+			order.setAllocatedTime(currentDateTime);
+						
+			order.setStatus("allocated");
+			order.setStatusDate(currentDateTime);
+			order.setStatusTime(currentDateTime);
+			
+			orderRepository.save(order);
+		}
+		
+		else if(status.equals("rejected")) {
+			order.setStatus("rejected");
+			order.setStatusDate(currentDateTime);
+			order.setStatusTime(currentDateTime);
+			
+			orderRepository.save(order);
+		}
+
+		return order;
 	}
 
 }

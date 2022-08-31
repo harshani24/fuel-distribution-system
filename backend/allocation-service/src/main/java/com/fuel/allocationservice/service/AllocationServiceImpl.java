@@ -102,6 +102,7 @@ public class AllocationServiceImpl implements AllocationService{
 	//=========================================2.Order Allocation===============================================================
 	@Override
 	public boolean orderAllocation(Order order) {
+		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		//Last Record Available Quantities
 		Stock lastStockRecord = getLastStockRecord();
@@ -130,8 +131,6 @@ public class AllocationServiceImpl implements AllocationService{
 			
 			OrderAllocation newOrder = new OrderAllocation();
 			Stock newStockRecord = lastStockRecord.clone();
-			
-			LocalDateTime currentDateTime = LocalDateTime.now();
 			
 			newOrder.setOrderId(order.getId());
 			newOrder.setDate(currentDateTime);
@@ -188,8 +187,7 @@ public class AllocationServiceImpl implements AllocationService{
 			 else {
 				  newOrder.setStatusSuperDiesel("none");
 				  newStockRecord.setStatusSuperDiesel("none");
-			 }
-			 
+			 }	 
 
 			 orderAllocationRepository.save(newOrder);
 			 
@@ -202,8 +200,7 @@ public class AllocationServiceImpl implements AllocationService{
 			newStockRecord.setOrderAllocationId(newOrder.getId());
 			newStockRecord.setDate(currentDateTime);
 			newStockRecord.setTime(currentDateTime);
-			newStockRecord.setDateTime(currentDateTime);
-			
+			newStockRecord.setDateTime(currentDateTime);		
 			
 			stockAllocationRepository.save( newStockRecord);
 			
@@ -211,7 +208,6 @@ public class AllocationServiceImpl implements AllocationService{
 		}
 		
 		else {
-			order.setStatus("rejected");
 			
 			return false;
 		}

@@ -15,4 +15,6 @@ public interface OrderService {
 	List<Order> viewAllOrders();
 	
 	String receivedConfirm(String id);
+
+	Order changeAllocationStatus(Order order, String status);
 }
