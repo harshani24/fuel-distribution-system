@@ -28,9 +28,17 @@ public class AllocationController {
 	}
 
 	public void orderAllocation(Order order) {
-		System.out.println(order.getId() + " " + order.getPassport());
+		boolean available = allocationService.orderAllocation(order);
+		System.out.println("allocation eke status " + available);
 		
-		System.out.println(allocationService.orderAllocation(order));
+		if(available) {
+			
+		}
+		
+		else {
+			//kafka producer eken rejection order topic ekata msg ekak
+			//order service eken eka balala status eka rejected karala danna
+		}
 		
 	}
 }

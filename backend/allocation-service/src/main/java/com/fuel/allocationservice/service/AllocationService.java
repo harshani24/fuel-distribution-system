@@ -11,10 +11,10 @@ public interface AllocationService {
 
 	Stock addStock(int octane92, int octane95, int autoDiesel , int superDiesel);
 	
-	String orderAllocation(Order order);
-	
-	OrderAllocation findAllocationRecordByOrderID(Order order);
+	boolean orderAllocation(Order order);
 
 	List<Stock> findAllStockDesc();
+	
+	//OrderAllocation findAllocationRecordByOrderID(Order order);
 
 }
