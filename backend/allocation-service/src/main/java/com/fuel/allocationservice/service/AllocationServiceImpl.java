@@ -101,7 +101,7 @@ public class AllocationServiceImpl implements AllocationService{
 	
 	//=========================================2.Order Allocation===============================================================
 	@Override
-	public boolean orderAllocation(Order order) {
+	public Order orderAllocation(Order order) {
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		//Last Record Available Quantities
@@ -194,22 +194,30 @@ public class AllocationServiceImpl implements AllocationService{
 			 
 			//last added orderRecord from OrderAllocation table
 			//OrderAllocation addedOrderRecord = addedOrderRecordInOrderAllocation(order.getId());
-			//no need this, bcz we can just access using  newOrder.getId()
+			//no need this, because we can just access using  newOrder.getId()
 			
 			newStockRecord.setOrderId(newOrder.getOrderId());
 			newStockRecord.setOrderAllocationId(newOrder.getId());
-			newStockRecord.setDate(currentDateTime);
-			newStockRecord.setTime(currentDateTime);
-			newStockRecord.setDateTime(currentDateTime);		
+			newStockRecord.setDate(newOrder.getDate());
+			newStockRecord.setTime(newOrder.getTime());
+			newStockRecord.setDateTime(newOrder.getDateTime());		
 			
 			stockAllocationRepository.save( newStockRecord);
 			
-			return true;
+			
+			order.setAllocated(true);
+			order.setAllocatedTime(newOrder.getDateTime());
+						
+			order.setStatusTime(newOrder.getTime());
+			order.setStatusDate(newOrder.getDate());
+			order.setStatusDateTime(newOrder.getDateTime());
+			
+			return order;
 		}
 		
 		else {
 			
-			return false;
+			return order;
 		}
 			
 	}

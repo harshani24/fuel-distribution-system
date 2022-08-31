@@ -96,35 +96,31 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Order changeAllocationStatus(Order currentOrder, String status) {
+	public Order changeAllocationStatus(Order currentOrder) {
 		
 		Optional<Order> order = orderRepository.findById(currentOrder.getId());
 		
 		if(order.isPresent()) {
-			return updateStatusAllocation(currentOrder, status);
+			return updateStatusAllocation(currentOrder);
 		}
 		
 		return null;	
 	}
 
-	private Order updateStatusAllocation(Order order, String status) {
+	private Order updateStatusAllocation(Order order) {
 	LocalDateTime currentDateTime = LocalDateTime.now();
 		
-		if(status.equals("allocated")) {
-			order.setAllocated(true);
-			order.setAllocatedTime(currentDateTime);
-						
+		if(order.isAllocated()) {			
 			order.setStatus("allocated");
-			order.setStatusDate(currentDateTime);
-			order.setStatusTime(currentDateTime);
 			
 			orderRepository.save(order);
 		}
 		
-		else if(status.equals("rejected")) {
+		else{
 			order.setStatus("rejected");
 			order.setStatusDate(currentDateTime);
 			order.setStatusTime(currentDateTime);
+			order.setStatusDateTime(currentDateTime);
 			
 			orderRepository.save(order);
 		}

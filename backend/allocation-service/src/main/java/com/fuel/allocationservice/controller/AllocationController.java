@@ -31,14 +31,14 @@ public class AllocationController {
 	}
 
 	public void orderAllocation(Order order) {
-		boolean available = allocationService.orderAllocation(order);
+		Order orderResult = allocationService.orderAllocation(order);
 		
-		if(available) {
-			producer.publishCompletionOfAllocation(order);
+		if(orderResult.isAllocated()) {
+			producer.publishCompletionOfAllocation(orderResult);
 		}
 		
 		else {
-			producer.publishRejectionOfAllocation(order);
+			producer.publishRejectionOfAllocation(orderResult);
 		}
 		
 	}

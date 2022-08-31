@@ -16,5 +16,5 @@ public interface OrderService {
 	
 	String receivedConfirm(String id);
 
-	Order changeAllocationStatus(Order order, String status);
+	Order changeAllocationStatus(Order order);
 }

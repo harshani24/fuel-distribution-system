@@ -54,13 +54,13 @@ public class OrderController {
 		return result;		
 	}
 	
-	public void changeAllocationStatusToAllocate(Order currentOrder, String status) {
-		Order order = orderService.changeAllocationStatus(currentOrder, status);
+	public void changeAllocationStatusToAllocate(Order currentOrder) {
+		Order order = orderService.changeAllocationStatus(currentOrder);
 		producer.publishToScheduleTopic(order);
 	}
 
-	public void changeAllocationStatusToReject(Order currentOrder, String status) {
-		orderService.changeAllocationStatus(currentOrder, status);
+	public void changeAllocationStatusToReject(Order currentOrder) {
+		orderService.changeAllocationStatus(currentOrder);
 	}
 
 }

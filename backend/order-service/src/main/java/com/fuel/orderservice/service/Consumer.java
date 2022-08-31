@@ -14,18 +14,20 @@ public class Consumer {
 	OrderController orderController;
 	
 	@KafkaListener(topics= "allocation-complete-topic",  groupId = "order-group")
-	public void listenAllocationCompleteTopic(Order order) {
+	public void listenAllocationCompleteTopic(Order order) throws InterruptedException {
 		System.out.println("Listen to allocation-complete-topic in OrderService from AllocationService " + order);
+		System.out.println("============== " +order.getStatus());
+		//Thread.sleep(10000);
 		
-		String status="allocated";
-		orderController.changeAllocationStatusToAllocate(order , status);
+		orderController.changeAllocationStatusToAllocate(order);
 	}
 	
 	@KafkaListener(topics= "allocation-reject-topic", groupId = "order-group")
-	public void listenAllocationRejectTopic(Order order) {
+	public void listenAllocationRejectTopic(Order order) throws InterruptedException {
 		System.out.println("Listen to allocation-reject-topic in OrderService from AllocationService " + order);
+		System.out.println("============== " +order.getStatus());
+		//Thread.sleep(10000);
 		
-		String status = "rejected";
-		orderController.changeAllocationStatusToReject(order, status);
+		orderController.changeAllocationStatusToReject(order);
 	}	
 }

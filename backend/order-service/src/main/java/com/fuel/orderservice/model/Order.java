@@ -52,9 +52,11 @@ public class Order {
 	private LocalDateTime completedTime;
 	
 	private String status;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "HH:mm:ss")
 	private LocalDateTime statusTime;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime statusDate;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime statusDateTime;
 
 }

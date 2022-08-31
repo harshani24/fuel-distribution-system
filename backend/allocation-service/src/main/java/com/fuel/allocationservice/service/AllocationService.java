@@ -11,7 +11,7 @@ public interface AllocationService {
 
 	Stock addStock(int octane92, int octane95, int autoDiesel , int superDiesel);
 	
-	boolean orderAllocation(Order order);
+	Order orderAllocation(Order order);
 
 	List<Stock> findAllStockDesc();
 	
