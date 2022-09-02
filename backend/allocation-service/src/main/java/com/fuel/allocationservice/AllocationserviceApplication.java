@@ -27,7 +27,7 @@ public class AllocationserviceApplication {
 	public void EventListenerExecute() {
 		System.out.println("Application Ready Event is successfully Started");
 		
-		allocationController.addStock(20000,20000,20000,20000);
+	    //allocationController.addStock(20000,20000,20000,20000);
 	}
 
 }

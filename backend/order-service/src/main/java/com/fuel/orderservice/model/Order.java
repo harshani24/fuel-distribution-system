@@ -47,7 +47,6 @@ public class Order {
 	private LocalDateTime dispatchedTime;
 	
 	private boolean completed;
-	//@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime completedTime;
 	

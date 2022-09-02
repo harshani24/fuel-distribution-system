@@ -204,13 +204,8 @@ public class AllocationServiceImpl implements AllocationService{
 			
 			stockAllocationRepository.save( newStockRecord);
 			
-			
 			order.setAllocated(true);
-			order.setAllocatedTime(newOrder.getDateTime());
-						
-			order.setStatusTime(newOrder.getTime());
-			order.setStatusDate(newOrder.getDate());
-			order.setStatusDateTime(newOrder.getDateTime());
+		    order.setAllocatedTime(newOrder.getDateTime());
 			
 			return order;
 		}

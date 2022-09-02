@@ -113,6 +113,12 @@ public class OrderServiceImpl implements OrderService{
 		if(order.isAllocated()) {			
 			order.setStatus("allocated");
 			
+			LocalDateTime allocatedTime  = order.getAllocatedTime();	
+			
+			order.setStatusTime(allocatedTime);
+			order.setStatusDate(allocatedTime);
+			order.setStatusDateTime(allocatedTime);		
+			
 			orderRepository.save(order);
 		}
 		
