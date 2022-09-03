@@ -134,6 +134,7 @@ public class AllocationServiceImpl implements AllocationService{
 			Stock newStockRecord = lastStockRecord.clone();
 			
 			newOrder.setOrderId(order.getId());
+			newOrder.setTime(currentDateTime.toLocalTime());		
 			newOrder.setDate(currentDateTime.toLocalDate());
 			newOrder.setDateTime(currentDateTime);
 			
