@@ -39,9 +39,10 @@ public class AllocationServiceImpl implements AllocationService{
 			
 			initialStock.setOrderId("00000");
 			initialStock.setOrderAllocationId("none");
-			initialStock.setDate(currentDateTime);
-			initialStock.setTime(currentDateTime);
+			initialStock.setTime(currentDateTime.toLocalTime());
+			initialStock.setDate(currentDateTime.toLocalDate());
 			initialStock.setDateTime(currentDateTime);
+			
 			
 			initialStock.setAvailableOcatane92(octane92);
 			initialStock.setAvailableOcatane95(octane95);
@@ -65,8 +66,8 @@ public class AllocationServiceImpl implements AllocationService{
 			newStock.setOrderId("00000");
 			newStock.setOrderAllocationId("none");
 
-			newStock.setDate(currentDateTime);
-			newStock.setTime(currentDateTime);
+			newStock.setTime(currentDateTime.toLocalTime());
+			newStock.setDate(currentDateTime.toLocalDate());
 			newStock.setDateTime(currentDateTime);
 			
 			newStock.setAvailableOcatane92(stock.getAvailableOcatane92()+octane92);
@@ -133,8 +134,7 @@ public class AllocationServiceImpl implements AllocationService{
 			Stock newStockRecord = lastStockRecord.clone();
 			
 			newOrder.setOrderId(order.getId());
-			newOrder.setDate(currentDateTime);
-			newOrder.setTime(currentDateTime);
+			newOrder.setDate(currentDateTime.toLocalDate());
 			newOrder.setDateTime(currentDateTime);
 			
 			
@@ -198,8 +198,8 @@ public class AllocationServiceImpl implements AllocationService{
 			
 			newStockRecord.setOrderId(newOrder.getOrderId());
 			newStockRecord.setOrderAllocationId(newOrder.getId());
-			newStockRecord.setDate(newOrder.getDate());
 			newStockRecord.setTime(newOrder.getTime());
+			newStockRecord.setDate(newOrder.getDate());
 			newStockRecord.setDateTime(newOrder.getDateTime());		
 			
 			stockAllocationRepository.save( newStockRecord);

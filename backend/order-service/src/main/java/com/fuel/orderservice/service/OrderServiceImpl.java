@@ -1,5 +1,6 @@
 package com.fuel.orderservice.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -87,8 +88,9 @@ public class OrderServiceImpl implements OrderService{
 		order.setCompletedTime(time);
 		
 		order.setStatus("completed");
-		order.setStatusTime(time);
-		order.setStatusDate(time);
+		order.setStatusTime(time.toLocalTime());
+		order.setStatusDate(time.toLocalDate());
+		order.setStatusDateTime(time);
 		
 		orderRepository.save(order);
 		
@@ -108,24 +110,25 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	private Order updateStatusAllocation(Order order) {
-	LocalDateTime currentDateTime = LocalDateTime.now();
 		
 		if(order.isAllocated()) {			
 			order.setStatus("allocated");
 			
 			LocalDateTime allocatedTime  = order.getAllocatedTime();	
 			
-			order.setStatusTime(allocatedTime);
-			order.setStatusDate(allocatedTime);
+			order.setStatusTime(allocatedTime.toLocalTime());
+			order.setStatusDate(allocatedTime.toLocalDate());
 			order.setStatusDateTime(allocatedTime);		
 			
 			orderRepository.save(order);
 		}
 		
 		else{
+			LocalDateTime currentDateTime = LocalDateTime.now();
+			
 			order.setStatus("rejected");
-			order.setStatusDate(currentDateTime);
-			order.setStatusTime(currentDateTime);
+			order.setStatusTime(currentDateTime.toLocalTime());			
+			order.setStatusDate(currentDateTime.toLocalDate());
 			order.setStatusDateTime(currentDateTime);
 			
 			orderRepository.save(order);

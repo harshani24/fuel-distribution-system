@@ -1,6 +1,8 @@
 package com.fuel.allocationservice.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -20,9 +22,9 @@ public class OrderAllocation{
 	@Indexed(unique = true)
 	private String orderId;	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime date;
+	private LocalDate date;
 	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalDateTime time;
+	private LocalTime time;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dateTime;
 	

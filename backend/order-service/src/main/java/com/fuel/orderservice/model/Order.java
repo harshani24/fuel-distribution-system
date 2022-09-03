@@ -1,6 +1,9 @@
 package com.fuel.orderservice.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -51,10 +54,11 @@ public class Order {
 	private LocalDateTime completedTime;
 	
 	private String status;
-	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalDateTime statusTime;
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime statusDate;
+	private LocalDate statusDate;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime statusTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime statusDateTime;
 

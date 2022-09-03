@@ -15,7 +15,7 @@ public class Consumer {
 	AllocationController allocationController;
 	
 	@KafkaListener(topics= "allocation-topic", groupId = "allocation-group" )
-	public void readAllocationTopic(Order order) throws InterruptedException {
+	public void listenAllocationTopic(Order order) throws InterruptedException {
 		System.out.println("Listen to allocation topic in AllocationService from OrderService " + order);
 		System.out.println("============== " +order.getStatus());
 		
