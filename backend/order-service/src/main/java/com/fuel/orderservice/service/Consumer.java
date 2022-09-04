@@ -30,4 +30,13 @@ public class Consumer {
 		
 		orderController.changeAllocationStatusToReject(order);
 	}	
+	
+	@KafkaListener(topics = "scheduled-complete-topic" , groupId = "order-group")
+	public void listenScheduledCompleteTopic(Order order) throws InterruptedException {
+		System.out.println("Listen to scheduled-complete-topic in OrderService from ScheduleService " + order);
+		System.out.println("============== " +order.getStatus());
+		//Thread.sleep(10000);
+		 
+		orderController.addScheduledDate(order);
+	}
 }

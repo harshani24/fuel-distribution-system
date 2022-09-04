@@ -62,5 +62,11 @@ public class OrderController {
 	public void changeAllocationStatusToReject(Order currentOrder) {
 		orderService.changeAllocationStatus(currentOrder);
 	}
+	
+	public void addScheduledDate(Order order) {
+		orderService.addScheduledDate(order);
+		
+		producer.publishToDispatchTopic(order);
+	}
 
 }

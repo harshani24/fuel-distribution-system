@@ -12,6 +12,7 @@ import com.fuel.orderservice.model.Order;
 public class Producer {
 	public static final String ALLOCATION_TOPIC = "allocation-topic";
 	public static final String SCHEDULE_TOPIC = "schedule-topic";
+	public static final String DISPATCH_TOPIC = "dispatch-topic";
 	
 	@Autowired
 	private KafkaTemplate<String, Order> kafkaTemplate;
@@ -26,6 +27,12 @@ public class Producer {
 		kafkaTemplate.send(SCHEDULE_TOPIC, order);
 		System.out.println("Publish order to schedule topic from order service " + order);
 		OrderserviceApplication.logger.info("OrderService:: Publish Order("+ order.getId()+ ") to Schedule Topic");
+	}
+	
+	public void publishToDispatchTopic(Order order) {
+		kafkaTemplate.send(DISPATCH_TOPIC, order);
+		System.out.println("Publish order to dispatch topic from order service " + order);
+		OrderserviceApplication.logger.info("OrderService:: Publish Order("+ order.getId()+ ") to Dispatch Topic");
 	}
 
 

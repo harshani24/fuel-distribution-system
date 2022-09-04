@@ -17,4 +17,6 @@ public interface OrderService {
 	String receivedConfirm(String id);
 
 	Order changeAllocationStatus(Order order);
+	
+	void addScheduledDate(Order order);
 }

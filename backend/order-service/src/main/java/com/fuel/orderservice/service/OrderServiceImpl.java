@@ -137,4 +137,19 @@ public class OrderServiceImpl implements OrderService{
 		return order;
 	}
 
+	@Override
+	public void addScheduledDate(Order order) {
+		
+		LocalDateTime scheduledDate = order.getScheduledTime();
+		
+		order.setSheduled(true);
+		
+		order.setStatus("scheduled");
+		order.setStatusDate(scheduledDate.toLocalDate());
+		order.setStatusTime(scheduledDate.toLocalTime());
+		order.setStatusDateTime(scheduledDate);
+		
+		orderRepository.save(order);
+	}
+
 }
