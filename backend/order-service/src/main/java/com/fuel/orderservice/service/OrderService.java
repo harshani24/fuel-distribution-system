@@ -2,6 +2,7 @@ package com.fuel.orderservice.service;
 
 import java.util.List;
 
+import com.fuel.orderservice.dto.ScheduleDTO;
 import com.fuel.orderservice.model.Order;
 
 public interface OrderService {
@@ -18,5 +19,6 @@ public interface OrderService {
 
 	Order changeAllocationStatus(Order order);
 	
-	void addScheduledDate(Order order);
+	ScheduleDTO addScheduledDate(Order order);
+
 }

@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fuel.orderservice.dto.ScheduleDTO;
 import com.fuel.orderservice.model.Order;
 import com.fuel.orderservice.repository.OrderRepository;
 
@@ -138,7 +140,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void addScheduledDate(Order order) {
+	public ScheduleDTO addScheduledDate(Order order) {
 		
 		LocalDateTime scheduledDate = order.getScheduledTime();
 		
@@ -149,7 +151,31 @@ public class OrderServiceImpl implements OrderService{
 		order.setStatusTime(scheduledDate.toLocalTime());
 		order.setStatusDateTime(scheduledDate);
 		
-		orderRepository.save(order);
+		Order scheduledOrder = orderRepository.save(order);
+		return getScheduledOrderForDispatch(scheduledOrder);
+	}
+	
+	public ScheduleDTO getScheduledOrderForDispatch(Order o) {
+		
+		ScheduleDTO scheduledDTO = new ScheduleDTO();
+		
+		scheduledDTO.setOrderId(o.getId());
+		scheduledDTO.setPassport(o.getPassport());
+		scheduledDTO.setStation(o.getStation());
+		
+		scheduledDTO.setOctane92(o.isOctane92());
+		scheduledDTO.setQuantityOctane92(o.getQuantityOctane92());
+		scheduledDTO.setOctane95(o.isOctane95());
+		scheduledDTO.setQuantityOctane95(o.getQuantityOctane95());
+		scheduledDTO.setAutoDiesel(o.isAutoDiesel());
+		scheduledDTO.setQuantityAutoDiesel(o.getQuantityAutoDiesel());
+		scheduledDTO.setSuperDiesel(o.isSuperDiesel());
+		scheduledDTO.setQuantitySuperDiesel(o.getQuantitySuperDiesel());
+		
+		scheduledDTO.toString();
+		
+		return scheduledDTO;
+		
 	}
 
 }

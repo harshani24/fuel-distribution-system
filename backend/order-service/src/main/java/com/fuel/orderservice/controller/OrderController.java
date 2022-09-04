@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fuel.orderservice.dto.ScheduleDTO;
 import com.fuel.orderservice.model.Order;
 import com.fuel.orderservice.service.OrderService;
 import com.fuel.orderservice.service.Producer;
@@ -64,9 +65,9 @@ public class OrderController {
 	}
 	
 	public void addScheduledDate(Order order) {
-		orderService.addScheduledDate(order);
-		
-		producer.publishToDispatchTopic(order);
+		ScheduleDTO scheduleDTO  = orderService.addScheduledDate(order);
+		producer.publishToDispatchTopic(scheduleDTO);
 	}
+	
 
-}
+} 
