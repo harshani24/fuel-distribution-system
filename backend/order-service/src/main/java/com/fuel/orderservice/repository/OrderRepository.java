@@ -6,4 +6,5 @@ import com.fuel.orderservice.model.Order;
 
 public interface OrderRepository extends MongoRepository<Order, String> {
 
+	Order findOrderById(String orderId);
 }

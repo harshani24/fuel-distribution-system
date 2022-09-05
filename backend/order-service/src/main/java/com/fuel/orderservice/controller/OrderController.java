@@ -69,5 +69,9 @@ public class OrderController {
 		producer.publishToDispatchTopic(scheduleDTO);
 	}
 	
+	
+	public void changeDispatchStatus(String orderId) {
+		orderService.changeDispatchStatus(orderId);
+	}
 
 } 

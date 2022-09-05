@@ -1,8 +1,6 @@
 package com.fuel.orderservice.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -172,10 +170,28 @@ public class OrderServiceImpl implements OrderService{
 		scheduledDTO.setSuperDiesel(o.isSuperDiesel());
 		scheduledDTO.setQuantitySuperDiesel(o.getQuantitySuperDiesel());
 		
-		scheduledDTO.toString();
+		scheduledDTO.setScheduledDate(o.getScheduledTime());
 		
 		return scheduledDTO;
 		
+	}
+	
+	@Override
+	public void changeDispatchStatus(String orderId) {
+		Order order = orderRepository.findOrderById(orderId);
+		LocalDateTime currentDateTime = LocalDateTime.now() ;
+		
+		order.setDispatched(true);
+		order.setDispatchedTime(currentDateTime);
+		
+		order.setStatus("dispatched");
+		order.setStatusDate(currentDateTime.toLocalDate());
+		order.setStatusTime(currentDateTime.toLocalTime());
+		order.setStatusDateTime(currentDateTime);
+		
+		orderRepository.save(order);
+		
+		System.out.println("After changing dispatch status " + order);
 	}
 
 }

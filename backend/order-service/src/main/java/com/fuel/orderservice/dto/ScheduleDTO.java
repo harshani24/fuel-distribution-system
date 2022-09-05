@@ -24,6 +24,6 @@ public class ScheduleDTO {
 	private int quantitySuperDiesel;
 	
 	
-	private LocalDateTime scheduledTime;
+	private LocalDateTime scheduledDate;
 	
 }

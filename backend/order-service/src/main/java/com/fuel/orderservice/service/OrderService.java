@@ -20,5 +20,7 @@ public interface OrderService {
 	Order changeAllocationStatus(Order order);
 	
 	ScheduleDTO addScheduledDate(Order order);
+	
+	void changeDispatchStatus(String orderId);
 
 }

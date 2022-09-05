@@ -39,4 +39,12 @@ public class Consumer {
 		 
 		orderController.addScheduledDate(order);
 	}
+	
+	@KafkaListener(topics = "dispatch-complete-topic" , groupId = "order-group")
+	public void listenDispatchCompleteTopic(String orderId) throws InterruptedException {
+		System.out.println("Listen to dispatch-complete-topic in OrderService from DispatchService " + orderId);
+		//Thread.sleep(10000);
+		 
+		orderController.changeDispatchStatus(orderId);
+	}
 }

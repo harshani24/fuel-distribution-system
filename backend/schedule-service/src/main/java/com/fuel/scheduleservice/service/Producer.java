@@ -16,8 +16,6 @@ public class Producer {
 	
 	
 	public void publishScheduledOrderDate(Order order) {
-		
-		System.out.println("Hii publish karanna awa " + order.getScheduledTime());
 		kafkaTemplate.send(SCHEDULED_COMPLETE_TOPIC, order);
 		System.out.println("Publish scheduled date to scheduled-complete-topic from scheduled service " + order);
 	}
