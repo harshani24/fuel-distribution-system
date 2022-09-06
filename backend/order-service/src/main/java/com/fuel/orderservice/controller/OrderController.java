@@ -56,7 +56,8 @@ public class OrderController {
 	}
 	
 	@PutMapping("/orders/receivedConfirm")
-	public String  receivedConfirm(@RequestBody String id) {
+	public String  receivedConfirm(@RequestBody Order o) {
+		String id = o.getId();
 		String result = orderService.receivedConfirm(id);
 		return result;		
 	}

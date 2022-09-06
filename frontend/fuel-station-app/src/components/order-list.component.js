@@ -10,7 +10,6 @@ const OrderList = (props) => {
     const [orders , setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [confirmedResult, setConfirmedResult] = useState();
     const [user, setUser] = useState('P00001');
 
     const fetchData = () => {
@@ -44,19 +43,17 @@ const OrderList = (props) => {
 
     const ordersList =  () => {
         return orders.map(order => {
-            return(<Order order={order} orderId={order.id} orderConfirm={confirmOrderReceived} key={order.id} dispatch={order.dispatched}/>)
+            return(<Order order={order} orderId={order.id} orderConfirm={confirmOrderReceived} key={order.id}/>)
         })
     }
 
    
    const confirmOrderReceived = (id) => {
-
-    axios.put(`http://localhost:8191/orders/receivedConfirm`,{ "id" : id })
+    axios.put(`http://localhost:8191/orders/receivedConfirm`,{ id : id })
         .then(res => console.log(res))
         .catch(err => console.log(err))
+    }
 
-    //fetchData();
-  }
     return (
         <div>
             {loading ? <div><Spinner/></div> : 
