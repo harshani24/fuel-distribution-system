@@ -39,7 +39,7 @@ const OrderList = (props) => {
 
     useEffect( () =>{
         fetchData();
-    },[]);
+    },[orders]);
 
     const ordersList =  () => {
         return orders.map(order => {

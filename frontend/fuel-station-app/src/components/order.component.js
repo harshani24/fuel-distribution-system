@@ -14,7 +14,7 @@ const Order = (props) => {
             <td>{props.order.status}</td>
             <td>
             <Link className="btn btn-secondary" to={"/view-order/"+props.orderId} style={{ width: "150px", marginRight: "10px" }}  > View Status</Link> 
-            {props.order.status == 'dispatched' ?<a href="/" className="btn btn-primary" style={{ width: "150px" }}  onClick={() => props.orderConfirm(props.order.id)}> Received Confirm</a> : null} 
+            {props.order.status === 'dispatched' ?<a href="/" className="btn btn-primary" style={{ width: "150px" }}  onClick={() => props.orderConfirm(props.order.id)}> Received Confirm</a> : null} 
             </td>
         </tr>
     ); 
