@@ -6,7 +6,6 @@ import Nav from './components/nav.component';
 import OrderList from './components/order-list.component';
 import AddOrder from './components/add-order.component';
 import ViewOrder from './components/view-order.component';
-import Order from './components/order.component';
 
 
 function App() {
@@ -14,13 +13,12 @@ function App() {
     <Router>
       <div className="container">
         <Nav/> 
-        <br/><br/><br/>
+        <br/><br/><br/> 
 
         <Routes>
             <Route path="/" element={<OrderList />} />
             <Route path="/add-order" element={<AddOrder />} />
-            <Route path="/view-order" element={<ViewOrder />} />
-            <Route path="/order" element={<Order />} />
+            <Route path="/view-order/:id" element={<ViewOrder />} />
         </Routes> 
       </div>
     </Router>

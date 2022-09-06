@@ -1,12 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Order = () => {
-    console.log("Order");
+const Order = (props) => {
     return (
-        <div>
-            Order
-        </div>
-    );
+        <tr>
+            <td>{props.order.id}</td>
+            <td>{props.order.passport}</td>
+            <td>{props.order.station}</td>
+            <td>{props.order.quantityOctane92}</td>
+            <td>{props.order.quantityOctane95}</td>
+            <td>{props.order.quantityAutoDiesel}</td>
+            <td>{props.order.quantitySuperDiesel}</td>
+            <td>{props.order.status}</td>
+            <td>
+            <Link className="btn btn-secondary" to={"/view-order/"+props.orderId} style={{ width: "150px", marginRight: "10px" }}  > View Status</Link> {props.dispatch ?<a href="/" className="btn btn-primary" style={{ width: "150px" }}  onClick={() => props.confirmOrderReceived(props.order.id)}> Received Confirm</a> : null} 
+            </td>
+        </tr>
+    ); 
 
 }
 

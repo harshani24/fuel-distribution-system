@@ -23,4 +23,6 @@ public interface OrderService {
 	
 	void changeDispatchStatus(String orderId);
 
+	List<Order> viewAllMyOrders(String passport);
+
 }

@@ -49,8 +49,14 @@ public class OrderController {
 		return status;
 	}
 	
-	@PutMapping("/orders/receivedConfirm/{id}")
-	public String  receivedConfirm(@PathVariable String id) {
+	@GetMapping("/orders/getMyOrders/{passport}")
+	public List<Order> getAllMyOrders(@PathVariable String passport) {
+		List<Order> orders = orderService.viewAllMyOrders(passport);
+		return orders;
+	}
+	
+	@PutMapping("/orders/receivedConfirm")
+	public String  receivedConfirm(@RequestBody String id) {
 		String result = orderService.receivedConfirm(id);
 		return result;		
 	}

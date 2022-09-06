@@ -194,4 +194,10 @@ public class OrderServiceImpl implements OrderService{
 		System.out.println("After changing dispatch status " + order);
 	}
 
+	@Override
+	public List<Order> viewAllMyOrders(String passport) {
+		List<Order> orders = orderRepository.findAllByPassport(passport);	
+		return orders;
+	}
+
 }

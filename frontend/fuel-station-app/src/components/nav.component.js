@@ -12,8 +12,6 @@ const Nav = (prop) => {
                     <div className="navbar-nav mr-auto">
                         <Link className="nav-item nav-link active" to="/">All Orders</Link>
                         <Link className="nav-item nav-link" to="/add-order">New Order</Link>
-                        <Link className="nav-item nav-link" to="/view-order">View Order</Link>
-                        <Link className="nav-item nav-link" to="/order">Order</Link>
                     </div>
                 </div>
             </nav>
