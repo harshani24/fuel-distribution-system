@@ -39,7 +39,7 @@ const OrderList = (props) => {
 
     useEffect( () =>{
         fetchData();
-    },[orders]);
+    },[]);
 
     const ordersList =  () => {
         return orders.map(order => {
@@ -58,7 +58,7 @@ const OrderList = (props) => {
         <div>
             {loading ? <div><Spinner/></div> : 
                 <div style={{outlineStyle:"solid", width:"95%" ,height:"100%", padding:"10px 30px"}}>
-                <h3>View All Orders(user-> {user})</h3>
+                <h2>View All Orders(user-> {user})</h2>
 
                 <div className="table-responsive">
                     <table className="table  table-bordered border-dark table-hover">

@@ -24,7 +24,13 @@ public class OrderServiceImpl implements OrderService{
 	public Order addOrder(Order order) {
 		
 	    String id = generateID(order); 
+	    LocalDateTime currentTime = LocalDateTime.now();
 		order.setId(id);
+		
+		order.setStatus("allocation needed");
+		order.setStatusDate(currentTime.toLocalDate());
+		order.setStatusTime(currentTime.toLocalTime());
+		order.setStatusDateTime(currentTime);
 		
 		orderRepository.save(order);
 		return order;
