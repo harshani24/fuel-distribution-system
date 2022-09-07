@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import axios from 'axios';
 
 import {FaPlusCircle} from 'react-icons/fa';
@@ -16,6 +16,9 @@ const AddOrder = () => {
    const [superDiesel, setSuperDiesel] = useState(false);
    const [quantitySuperDiesel , setQuantitySuperDiesel] = useState(0);
 
+   const [errorMsg , setErrorMsg] = useState(false);
+
+
    const onSubmit = (e) =>{ 
         e.preventDefault();
 
@@ -31,19 +34,33 @@ const AddOrder = () => {
             superDiesel : superDiesel,
             quantitySuperDiesel : quantitySuperDiesel
         }
-
-        console.log(order);
  
-        axios.post("http://localhost:8191/orders" , order)
+        if(octane92 === true || octane95 === true || autoDiesel === true || superDiesel === true){
+
+            setErrorMsg(false);
+
+            axios.post("http://localhost:8191/orders" , order)
              .then(res => console.log(res.data))
              .catch(err => console.log(err));
 
-        window.location = '/';
+            window.location = '/';
+        }  
+
+        else{
+            setErrorMsg(true);
+        }
+        
 
    }
 
     return (
         <div style={{outlineStyle:"solid", width:"75%" ,height:"100%", padding:"30px 40px"}}>
+            
+            {errorMsg ? <div class="alert alert-danger" role="alert">
+                    Please select at least on fuel types to make order!
+                </div> : null}
+
+
             <h2> Add Order</h2> <br/>
 
             <form onSubmit={onSubmit}>
@@ -79,6 +96,7 @@ const AddOrder = () => {
                         setQuantityOctane92(e.target.value); 
                         if(e.target.value> 0) {
                             setOctane92(true);
+                            setErrorMsg(false);
                         }
                         }} />
                     </div>
@@ -94,6 +112,7 @@ const AddOrder = () => {
                         setQuantityOctane95(e.target.value); 
                         if(e.target.value> 0) {
                             setOctane95(true);
+                            setErrorMsg(false);
                         }
                         }} />
                     </div>
@@ -109,6 +128,7 @@ const AddOrder = () => {
                         setQuantityAutoDiesel(e.target.value); 
                         if(e.target.value> 0) {
                             setAutoDiesel(true);
+                            setErrorMsg(false);
                         }
                         }} />
                     </div>
@@ -123,6 +143,7 @@ const AddOrder = () => {
                         setQuantitySuperDiesel(e.target.value); 
                         if(e.target.value> 0) {
                             setSuperDiesel(true);
+                            setErrorMsg(false);
                         }
                         }} />
                     </div>
@@ -132,7 +153,7 @@ const AddOrder = () => {
                 <div className='form-group'>
                     <button type="submit" className="btn btn-primary" style={{width:"30%" , padding:"10px 40px"}}><FaPlusCircle />  Make Order</button>
                 </div>
-
+                
             </form>
         </div>
     );
