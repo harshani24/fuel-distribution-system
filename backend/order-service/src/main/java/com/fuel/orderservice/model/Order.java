@@ -37,6 +37,10 @@ public class Order {
 	private boolean superDiesel;
 	private int quantitySuperDiesel;
 	
+	private boolean ordered;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime orderedTime;
+	
 	private boolean allocated;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime allocatedTime;
@@ -52,6 +56,10 @@ public class Order {
 	private boolean completed;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime completedTime;
+	
+	private boolean rejected;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime rejectedTime;
 	
 	private String status;
 

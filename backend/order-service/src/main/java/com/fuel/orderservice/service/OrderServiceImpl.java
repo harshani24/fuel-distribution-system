@@ -27,6 +27,9 @@ public class OrderServiceImpl implements OrderService{
 	    LocalDateTime currentTime = LocalDateTime.now();
 		order.setId(id);
 		
+		order.setOrdered(true);
+		order.setOrderedTime(currentTime);
+		
 		order.setStatus("allocation needed");
 		order.setStatusDate(currentTime.toLocalDate());
 		order.setStatusTime(currentTime.toLocalTime());
@@ -131,6 +134,9 @@ public class OrderServiceImpl implements OrderService{
 		
 		else{
 			LocalDateTime currentDateTime = LocalDateTime.now();
+			
+			order.setRejected(true);
+			order.setScheduledTime(currentDateTime);
 			
 			order.setStatus("rejected");
 			order.setStatusTime(currentDateTime.toLocalTime());			

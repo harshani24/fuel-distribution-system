@@ -4,8 +4,6 @@ import axios from 'axios';
 import {FaPlusCircle} from 'react-icons/fa';
 
 const AddOrder = () => {
-   console.log("Add Order");
-
    const [passport, setPassport] = useState('');
    const [station, setStation] = useState('');
 
