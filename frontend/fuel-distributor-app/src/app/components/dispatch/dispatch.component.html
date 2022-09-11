@@ -1,1 +1,44 @@
-<p>dispatch works!</p>
+<div>
+    <br/><br/><br/>
+    <div [ngStyle] ="{padding:'10px 30px'}">
+        <h2>Dispatches</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered border-dark table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Station</th>
+                        <th>Octane92(L)</th>
+                        <th>Octane95(L)</th>
+                        <th>Auto Diesel(L)</th>
+                        <th>Super Diesel(L)</th>
+                        <th>Scheduled Date</th>
+                        <th>Dispatched Date</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead> 
+
+                <tbody>
+                    <tr *ngFor="let dispatch of dispatches" >
+                        <td>{{dispatch.orderId}}</td>
+                        <td>{{dispatch.passport}}</td>
+                        <td>{{dispatch.station}}</td>
+                        <td>{{dispatch.quantityOctane92}}</td>
+                        <td>{{dispatch.quantityOctane95}}</td>
+                        <td>{{dispatch.quantityAutoDiesel}}</td>
+                        <td>{{dispatch.quantitySuperDiesel}}</td>
+                        <td>{{dispatch.scheduledDate}}</td>
+                        <td>{{dispatch.dispatchedDate}}</td>
+                        <td>
+                            <a routerLink="/dispatches" class='btn btn-primary' [ngStyle]="{width: '150px'}" (click)="dispatchOrder(dispatch.orderId)"> Dispatch </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

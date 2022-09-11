@@ -46,7 +46,7 @@ let DispatchService = class DispatchService {
         let hour = d[3];
         let min = d[4];
         let sec = d[5];
-        let scheduleDate = new Date(+year, month - 1, +date, +hour, +min, +sec);
+        let scheduleDate = new Date(+year, month - 1, +date);
         console.log(scheduleDate);
         return scheduleDate;
     }

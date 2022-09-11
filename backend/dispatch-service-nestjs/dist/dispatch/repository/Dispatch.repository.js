@@ -32,7 +32,7 @@ let DispatchRepository = class DispatchRepository {
     }
     async setDispatchStatus(id) {
         console.log('Setting order dispatched status ' + id);
-        const filter = { id: id };
+        const filter = { orderId: id };
         const update = { dispatchedDate: new Date() };
         const record = await this.dispatchModel.findOneAndUpdate(filter, update, {
             new: true,

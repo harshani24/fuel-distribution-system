@@ -18,7 +18,7 @@ export class DispatchService {
   }
  
   dispatch(orderId : string) : Observable<Dispatch> {
-    return this.http.post<Dispatch>(this.url, orderId);
+    return this.http.post<Dispatch>(this.url, {orderId});
   }
 
 }
