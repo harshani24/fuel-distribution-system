@@ -18,7 +18,6 @@ function App() {
         <Routes>
             <Route path="/" element={<OrderList />} />
             <Route path="/add-order" element={<AddOrder />} />
-            <Route path="/view-order/:id" element={<ViewOrder />} />
         </Routes> 
       </div>
     </Router>

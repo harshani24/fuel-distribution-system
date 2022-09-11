@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 const Nav = (prop) => {
- 
+  
     return (
         <div>
              <nav className="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">

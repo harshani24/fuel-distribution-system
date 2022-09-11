@@ -1,0 +1,51 @@
+<div>
+    <br/><br/><br/>
+    <div [ngStyle] ="{padding:'10px 30px'}">
+        <h2>View All Orders</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered border-dark table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Station</th>
+                        <th>Octane92(L)</th>
+                        <th>Octane95(L)</th>
+                        <th>Auto Diesel(L)</th>
+                        <th>Super Diesel(L)</th>
+                        <th>Status</th>
+                        <th>Ordered Date</th>
+                        <th>Allocated Date</th>
+                        <th>Scheduled Date</th>
+                        <th>Dispatched Date</th>
+                        <th>Completed Date</th>
+                        <th>Rejected Date</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead> 
+
+                <tbody>
+                    <tr *ngFor="let order of orders" >
+                        <td>{{order.id}}</td>
+                        <td>{{order.passport}}</td>
+                        <td>{{order.station}}</td>
+                        <td>{{order.quantityOctane92}}</td>
+                        <td>{{order.quantityOctane95}}</td>
+                        <td>{{order.quantityAutoDiesel}}</td>
+                        <td>{{order.quantitySuperDiesel}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.orderedTime}}</td>
+                        <td>{{order.allocatedTime}}</td>
+                        <td>{{order.sheduledTime}}</td>
+                        <td>{{order.dispatchedTime}}</td>
+                        <td>{{order.completedTime}}</td>
+                        <td>{{order.rejectedTime}}</td>
+                        <td>{{order.orderedTime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
