@@ -39,8 +39,6 @@ export class DispatchService {
   }
 
   setDateValues(d: number[]): Date {
-    //[ 2022, 8, 4, 19, 25, 21, 764327200 ]
-    //[2022,9,5,22,39,13]
     let year: number= d[0];
     let month: number= d[1];
     let date: number= d[2];

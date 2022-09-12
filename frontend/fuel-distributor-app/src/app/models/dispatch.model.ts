@@ -1,3 +1,5 @@
+import { DatePipe } from "@angular/common";
+
 export interface Dispatch {
     id : string;
     orderId : string;
