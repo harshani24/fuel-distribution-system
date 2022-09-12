@@ -14,8 +14,8 @@ export interface Order{
     orderedTime: Date;
     allocated : boolean;
     allocatedTime : Date;
-    sheduled : boolean;
-    sheduledTime : Date; 
+    scheduled : boolean;
+    scheduledTime : Date; 
     dispatched : boolean;
     dispatchedTime : Date;
     completed : boolean;

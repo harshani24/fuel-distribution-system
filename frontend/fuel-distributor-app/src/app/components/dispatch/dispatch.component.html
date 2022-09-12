@@ -1,6 +1,11 @@
 <div>
     <br/><br/><br/>
     <div [ngStyle] ="{padding:'10px 30px'}">
+        
+        <div class="alert alert-success" role="alert" *ngIf="dispatchedMsg">
+            Successfully dispatched {{orderID}}!!!
+        </div>
+
         <h2>Dispatches</h2>
 
         <div class="table-responsive">
@@ -15,7 +20,6 @@
                         <th>Auto Diesel(L)</th>
                         <th>Super Diesel(L)</th>
                         <th>Scheduled Date</th>
-                        <th>Dispatched Date</th>
                         <th>Actions</th>
                     </tr>
 
@@ -30,10 +34,9 @@
                         <td>{{dispatch.quantityOctane95}}</td>
                         <td>{{dispatch.quantityAutoDiesel}}</td>
                         <td>{{dispatch.quantitySuperDiesel}}</td>
-                        <td>{{dispatch.scheduledDate}}</td>
-                        <td>{{dispatch.dispatchedDate}}</td>
+                        <td [ngStyle] ="{'font-weight':'bold'}">{{dispatch.scheduledDate}}</td>
                         <td>
-                            <a routerLink="/dispatches" class='btn btn-primary' [ngStyle]="{width: '150px'}" (click)="dispatchOrder(dispatch.orderId)"> Dispatch </a>
+                            <button class='btn btn-primary' [ngStyle]="{width: '150px'}" (click)="dispatchOrder(dispatch.orderId)"> Dispatch </button>
                         </td>
                     </tr>
                 </tbody>

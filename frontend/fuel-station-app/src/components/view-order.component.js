@@ -85,7 +85,7 @@ const ViewOrder = () => {
                     <label className='col-sm-2 col-form-label'><h6> Current Status: </h6> </label>
 
                     <div className="col-sm-4">
-                    <input type ='text' readOnly className='form-control' value={order.status} />
+                    <input type ='text' readOnly className='form-control' value={order.status}  style={{"font-weight":"bold" , "color": "red"}}/>
                     </div>
                 </div>
                 <br/>

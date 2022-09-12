@@ -34,13 +34,13 @@
                         <td>{{order.quantityOctane95}}</td>
                         <td>{{order.quantityAutoDiesel}}</td>
                         <td>{{order.quantitySuperDiesel}}</td>
-                        <td>{{order.status}}</td>
+                        <td [ngStyle] ="{'font-weight' : 'bold','color':'red'}">{{order.status}}</td>
                         <td>{{order.orderedTime}}</td>
-                        <td>{{order.allocatedTime}}</td>
-                        <td>{{order.sheduledTime}}</td>
-                        <td>{{order.dispatchedTime}}</td>
-                        <td>{{order.completedTime}}</td>
-                        <td>{{order.rejectedTime}}</td>
+                        <td>{{order.allocated ? order.allocatedTime : '-'}}</td>
+                        <td>{{order.scheduled ? order.scheduledTime : '-'}}</td>
+                        <td>{{order.dispatched ? order.dispatchedTime : '-'}}</td>
+                        <td>{{order.completed ? order.completedTime : '-'}}</td>
+                        <td>{{order.rejected ? order.rejectedTime : 'Not Rejected'}}</td>
                     </tr>
                 </tbody>
             </table>

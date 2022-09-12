@@ -11,6 +11,8 @@ import {DispatchService} from 'src/app/services/dispatch.service';
 export class DispatchComponent implements OnInit {
 
   dispatches : Dispatch[] = [];
+  dispatchedMsg : boolean = false ;
+  orderID : string = '';
 
   constructor(private dispatchservice : DispatchService) { }
 
@@ -19,13 +21,14 @@ export class DispatchComponent implements OnInit {
   }
 
   getAllDispatches() : void{
-    console.log("Hii");
     this.dispatchservice.getAllDispatches().subscribe((dispatches: Dispatch[]) => this.dispatches = dispatches);
   }
 
   dispatchOrder(orderId : string) : void {
     this.dispatchservice.dispatch(orderId).subscribe( (dispatch :Dispatch) => console.log(dispatch));
-    this.getAllDispatches();
+    this.dispatchedMsg = true;
+    this.orderID = orderId;
+    window.location.reload();
   }
 
 }

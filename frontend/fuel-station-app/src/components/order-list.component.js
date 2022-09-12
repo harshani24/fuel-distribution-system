@@ -9,12 +9,27 @@ const OrderList = (props) => {
 
     const [orders , setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [dispatchedMsg , setDispatchedMsg] = useState(false);
+    const [orderId , setOrderId] = useState('');
 
     const [user, setUser] = useState('P00001');
 
+
+    useEffect( () =>{
+        fetchData();
+    },[]);
+
     const fetchData = () => {
         console.log(user);
-        axios.get(`http://localhost:8191/orders/getMyOrders/${user}`)
+        // axios.get(`http://localhost:8191/orders/getMyOrders/${user}`)
+        //       .then( res => {
+        //           console.log(res.data)
+        //           setOrders(res.data);
+        //           setLoading(false);
+        //       })
+        //       .catch(err => console.log(err))
+
+        axios.get(`http://localhost:8191/orders/`)
               .then( res => {
                   console.log(res.data)
                   setOrders(res.data);
@@ -22,24 +37,7 @@ const OrderList = (props) => {
               })
               .catch(err => console.log(err))
 
-       // fetch('http://localhost:8191/orders', {
-        //   method: 'get',
-        // })
-        //   .then((response) => {
-        //     console.log(response.json());
-        //     //return response.json();
-        //   })
-        //   .then((data) => {
-        //     console.log(data);
-        //     setExercies(data);
-        //     setLoading(false);
-        //   });
-
     };
-
-    useEffect( () =>{
-        fetchData();
-    },[]);
 
     const ordersList =  () => {
         return orders.map(order => {
@@ -49,15 +47,26 @@ const OrderList = (props) => {
 
    
    const confirmOrderReceived = (id) => {
-    axios.put(`http://localhost:8191/orders/receivedConfirm`,{ id : id })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        axios.put(`http://localhost:8191/orders/receivedConfirm`,{ id : id })
+            .then(res =>{
+                console.log(res)
+                setDispatchedMsg(true);
+                setOrderId(id);
+            })
+            .catch(err => console.log(err))
+    
     }
  
     return (
         <div>
             {loading ? <div><Spinner/></div> : 
-                <div style={{outlineStyle:"solid", width:"95%" ,height:"100%", padding:"10px 30px"}}>
+                <div style={{outlineStyle:"solid", width:"95%" ,height:"100%", padding:"10px 20px"}}>
+                {
+                    dispatchedMsg ? <div class="alert alert-primary" role="alert">
+                      Confirm the Completion of Order '{orderId}' !!!
+                    </div> : null
+                }
+
                 <h2>View All Orders(user-> {user})</h2>
 
                 <div className="table-responsive">
