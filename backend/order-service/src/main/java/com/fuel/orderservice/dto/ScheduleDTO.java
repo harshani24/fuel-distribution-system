@@ -25,5 +25,6 @@ public class ScheduleDTO {
 	
 	
 	private LocalDateTime scheduledDate;
+	private LocalDateTime dispatchedDate;
 	
 }

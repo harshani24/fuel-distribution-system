@@ -10,6 +10,7 @@ import {
   Query,
   UsePipes,
   ValidationPipe,
+  Headers
 } from '@nestjs/common';
 import { DispatchService } from './service/dispatch.service';
 import { Dispatch } from './schemas/Dispatch.schema';
@@ -41,8 +42,29 @@ export class DispatchController {
   //(http://localhost:8194/dispatch) +  request body
   @Post()
   async setOrderStatus(@Body() body) {
+    const record = await this.dispatchService.setDispatchStatus(body.orderId);
+    // const dispatchCreateDto = new DispatchCreateDto();
+
+    // dispatchCreateDto.orderId = record.orderId;
+    // dispatchCreateDto.station = record.station;
+    // dispatchCreateDto.passport = record.passport;
+
+    // dispatchCreateDto.octane92 = record.octane92;
+    // dispatchCreateDto.quantityOctane92 = record.quantityOctane92;
+    // dispatchCreateDto.octane95 = record.octane95;
+    // dispatchCreateDto.quantityOctane95 = record.quantityOctane95;
+    // dispatchCreateDto.autoDiesel = record.autoDiesel;
+    // dispatchCreateDto.quantityAutoDiesel = record.quantityAutoDiesel;
+    // dispatchCreateDto.superDiesel = record.superDiesel;
+    // dispatchCreateDto.quantitySuperDiesel = record.quantitySuperDiesel;
+
+    //dispatchCreateDto.scheduledDate = record.scheduledDate;
+    //dispatchCreateDto.dispatchedDate = record.dispatchedDate;
+
+    //this.updateOrderStatus(dispatchCreateDto);
     this.updateOrderStatus(body.orderId);
-    return await this.dispatchService.setDispatchStatus(body.orderId);
+
+    return record;
   }
 
   //kafka consumer
@@ -79,6 +101,9 @@ export class DispatchController {
   }
 
   //send msg to the kafka
+  // async updateOrderStatus(dispatchOrder : DispatchCreateDto) {
+  //   this.client.emit('dispatch-complete-topic', dispatchOrder);
+  // }
   async updateOrderStatus(id) {
     this.client.emit('dispatch-complete-topic', id);
   }

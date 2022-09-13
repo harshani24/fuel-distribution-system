@@ -30,6 +30,7 @@ export class DispatchRepository {
     const record = await this.dispatchModel.findOneAndUpdate(filter, update, {
       new: true,
     });
+
     return record;
   }
 }

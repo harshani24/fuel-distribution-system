@@ -12,4 +12,5 @@ export declare class DispatchCreateDto {
     superDiesel: boolean;
     quantitySuperDiesel: number;
     scheduledDate: Date;
+    dispatchedDate: Date;
 }

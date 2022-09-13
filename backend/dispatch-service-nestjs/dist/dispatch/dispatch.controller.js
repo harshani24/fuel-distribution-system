@@ -27,8 +27,9 @@ let DispatchController = class DispatchController {
         return await this.dispatchService.getAll();
     }
     async setOrderStatus(body) {
+        const record = await this.dispatchService.setDispatchStatus(body.orderId);
         this.updateOrderStatus(body.orderId);
-        return await this.dispatchService.setDispatchStatus(body.orderId);
+        return record;
     }
     scheduleListener(message) {
         console.log("new message " + JSON.stringify(message));

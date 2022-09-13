@@ -45,7 +45,7 @@ public class Order {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime allocatedTime;
 	
-	private boolean sheduled;
+	private boolean scheduled;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime scheduledTime;
 	

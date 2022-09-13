@@ -24,4 +24,6 @@ export class DispatchCreateDto {
 
   @IsNotEmpty()
   scheduledDate: Date;
+
+  dispatchedDate: Date;
 }

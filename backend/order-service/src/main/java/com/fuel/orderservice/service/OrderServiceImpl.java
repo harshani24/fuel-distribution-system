@@ -154,7 +154,7 @@ public class OrderServiceImpl implements OrderService{
 		
 		LocalDateTime scheduledDate = order.getScheduledTime();
 		
-		order.setSheduled(true);
+		order.setScheduled(true);
 		
 		order.setStatus("scheduled");
 		order.setStatusDate(scheduledDate.toLocalDate());
