@@ -21,21 +21,21 @@ const OrderList = (props) => {
 
     const fetchData = () => {
         console.log(user);
-        // axios.get(`http://localhost:8191/orders/getMyOrders/${user}`)
-        //       .then( res => {
-        //           console.log(res.data)
-        //           setOrders(res.data);
-        //           setLoading(false);
-        //       })
-        //       .catch(err => console.log(err))
-
-        axios.get(`http://localhost:8191/orders/`)
+        axios.get(`http://localhost:8191/orders/getMyOrders/${user}`)
               .then( res => {
                   console.log(res.data)
                   setOrders(res.data);
                   setLoading(false);
               })
               .catch(err => console.log(err))
+
+        // axios.get(`http://localhost:8191/orders/`)
+        //       .then( res => {
+        //           console.log(res.data)
+        //           setOrders(res.data);
+        //           setLoading(false);
+        //       })
+        //       .catch(err => console.log(err))
 
     };
 

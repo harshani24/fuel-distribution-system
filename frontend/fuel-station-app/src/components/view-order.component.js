@@ -142,7 +142,7 @@ const ViewOrder = () => {
                     <label className='col-sm-2 col-form-label'><h6> Allocated Date: </h6> </label>
                     <div className="col-sm-4">
                     <input readOnly className='form-control' value={order.allocatedTime} />
-                    </div> <br/></div>
+                    </div> </div><br/>
                 </div>: null }
        
 
@@ -150,28 +150,28 @@ const ViewOrder = () => {
                     <label className='col-sm-2 col-form-label'><h6> Scheduled Date: </h6> </label>
                     <div className="col-sm-4">
                     <input readOnly className='form-control' value={order.scheduledTime} />
-                    </div><br/></div>
+                    </div></div><br/>
                 </div> : null}
 
                 {dispatched ? <div> <div className='form-group row'>
                     <label className='col-sm-2 col-form-label'><h6> Dispatched Date: </h6> </label>
                     <div className="col-sm-4">
                     <input readOnly className='form-control' value={order.dispatchedTime} />
-                    </div><br/></div>
+                    </div></div><br/>
                 </div> :null}
 
                 {completed ?<div> <div className='form-group row'>
                     <label className='col-sm-2 col-form-label'><h6> Completed Date: </h6> </label>
                     <div className="col-sm-4">
                     <input readOnly className='form-control' value={order.completedTime} />
-                    </div><br/></div>
+                    </div></div><br/>
                 </div>: null}
 
                 {rejected ? <div><div className='form-group row'>
                     <label className='col-sm-2 col-form-label'><h6> Rejected Date: </h6> </label>
                     <div className="col-sm-4">
                     <input readOnly className='form-control' value={order.rejectedTime} />
-                    </div><br/></div>
+                    </div></div><br/>
                 </div>: null}
                <br/>
 
