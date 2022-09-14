@@ -15,36 +15,29 @@ public class Consumer {
 	OrderController orderController;
 	
 	@KafkaListener(topics= "allocation-complete-topic",  groupId = "order-group")
-	public void listenAllocationCompleteTopic(Order order) throws InterruptedException {
+	public void listenAllocationCompleteTopic(Order order){
 		System.out.println("Listen to allocation-complete-topic in OrderService from AllocationService " + order);
-		System.out.println("============== " +order.getStatus());
-		//Thread.sleep(10000);
 		
 		orderController.changeAllocationStatusToAllocate(order);
 	}
 	
 	@KafkaListener(topics= "allocation-reject-topic", groupId = "order-group" )
-	public void listenAllocationRejectTopic(Order order) throws InterruptedException {
+	public void listenAllocationRejectTopic(Order order){
 		System.out.println("Listen to allocation-reject-topic in OrderService from AllocationService " + order);
-		System.out.println("============== " +order.getStatus());
-		//Thread.sleep(10000);
-		
+	
 		orderController.changeAllocationStatusToReject(order);
 	}	
 	
 	@KafkaListener(topics = "scheduled-complete-topic" , groupId = "order-group")
-	public void listenScheduledCompleteTopic(Order order) throws InterruptedException {
+	public void listenScheduledCompleteTopic(Order order){
 		System.out.println("Listen to scheduled-complete-topic in OrderService from ScheduleService " + order);
-		System.out.println("============== " +order.getStatus());
-		//Thread.sleep(10000);
 		 
 		orderController.addScheduledDate(order);
 	}
 	
 	@KafkaListener(topics = "dispatch-complete-topic" , groupId = "order-group" , containerFactory = "sKafkaListenerContainerFactory")
-	public void listenDispatchCompleteTopic(String id) throws InterruptedException {
+	public void listenDispatchCompleteTopic(String id){
 		System.out.println("Listen to dispatch-complete-topic in OrderService from DispatchService " + id);
-		//Thread.sleep(10000);
 		 
 		orderController.changeDispatchStatus(id);
 	}

@@ -21,20 +21,28 @@ public class OrderAllocation{
 	
 	@Indexed(unique = true)
 	private String orderId;	
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private LocalDate allocatedDate;
 	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime time;
+	private LocalTime allocatedTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime dateTime;
+	private LocalDateTime allocatedDateTime;
 	
-	private int allocatedOcatane92;
-	private int dispatchedOcatane92;
-	private String statusOcatane92;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dispatchedDate;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime dispatchedTime;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime dispatchedDateTime;
 	
-	private int allocatedOcatane95;
-	private int dispatchedOcatane95;
-	private String statusOcatane95;
+	private int allocatedOctane92;
+	private int dispatchedOctane92;
+	private String statusOctane92;
+	
+	private int allocatedOctane95;
+	private int dispatchedOctane95;
+	private String statusOctane95;
 	
 	private int allocatedAutoDiesel;
 	private int dispatchedAutoDiesel;
@@ -50,13 +58,13 @@ public class OrderAllocation{
 	   
 	   order.setOrderId(orderId);
 	   
-	   order.setAllocatedOcatane92(allocatedOcatane92);
-	   order.setAllocatedOcatane95(allocatedOcatane95);
+	   order.setAllocatedOctane92(allocatedOctane92);
+	   order.setAllocatedOctane95(allocatedOctane95);
 	   order.setAllocatedAutoDiesel(allocatedAutoDiesel);
 	   order.setAllocatedSuperDiesel(allocatedSuperDiesel);
 	   
-	   order.setDispatchedOcatane92(dispatchedOcatane92);
-	   order.setDispatchedOcatane95(dispatchedOcatane95);
+	   order.setDispatchedOctane92(dispatchedOctane92);
+	   order.setDispatchedOctane95(dispatchedOctane95);
 	   order.setDispatchedAutoDiesel(dispatchedAutoDiesel);
 	   order.setDispatchedSuperDiesel(dispatchedSuperDiesel);
 	   

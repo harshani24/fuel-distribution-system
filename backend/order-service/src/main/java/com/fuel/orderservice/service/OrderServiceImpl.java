@@ -189,7 +189,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public void changeDispatchStatus(String orderId) {
+	public Order changeDispatchStatus(String orderId) {
 		Order order = orderRepository.findOrderById(orderId);
 		LocalDateTime currentDateTime = LocalDateTime.now() ;
 		
@@ -204,6 +204,8 @@ public class OrderServiceImpl implements OrderService{
 		orderRepository.save(order);
 		
 		System.out.println("After changing dispatch status " + order);
+		
+		return order;
 	}
 
 	@Override

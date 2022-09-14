@@ -78,7 +78,8 @@ public class OrderController {
 	
 	
 	public void changeDispatchStatus(String orderId) {
-		orderService.changeDispatchStatus(orderId);
+		Order order = orderService.changeDispatchStatus(orderId);
+		producer.publishToStockUpdateTopic(order);
 	}
 
 } 

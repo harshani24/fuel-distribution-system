@@ -14,6 +14,7 @@ public class Producer {
 	public static final String ALLOCATION_TOPIC = "allocation-topic";
 	public static final String SCHEDULE_TOPIC = "schedule-topic";
 	public static final String DISPATCH_TOPIC = "dispatch-topic";
+	public static final String STOCK_UPDATE_TOPIC = "dispatch-stock-update-topic";
 	
 	@Autowired
 	private KafkaTemplate<String, Order> kafkaTemplateOrder;
@@ -39,6 +40,12 @@ public class Producer {
 		kafkaTemplateSchedule.send(DISPATCH_TOPIC, scheduleDTO);
 		System.out.println("Publish order to dispatch topic from order service " + scheduleDTO);
 		OrderserviceApplication.logger.info("OrderService:: Publish Order("+ scheduleDTO.getOrderId()+ ") to Dispatch Topic");
+	}
+	
+	public void publishToStockUpdateTopic(Order order) {
+		kafkaTemplateOrder.send(STOCK_UPDATE_TOPIC, order);
+		System.out.println("Publish order to dispatch-stock-update topic from order service " + order);
+		OrderserviceApplication.logger.info("OrderService:: Publish Order("+ order.getId() +") to Dispatch-Stock-Update Topic");
 	}
 
 

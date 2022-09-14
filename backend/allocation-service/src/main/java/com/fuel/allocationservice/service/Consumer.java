@@ -15,12 +15,17 @@ public class Consumer {
 	AllocationController allocationController;
 	
 	@KafkaListener(topics= "allocation-topic", groupId = "allocation-group" )
-	public void listenAllocationTopic(Order order) throws InterruptedException {
+	public void listenAllocationTopic(Order order){
 		System.out.println("Listen to allocation topic in AllocationService from OrderService " + order);
-		System.out.println("============== " +order.getStatus());
 		
-		//Thread.sleep(10000);
 		allocationController.orderAllocation(order);	
+	}
+	
+	@KafkaListener(topics= "dispatch-stock-update-topic", groupId = "allocation-group" )
+	public void listenDispatchStockUpdateTopic(Order order){
+		System.out.println("Listen to dispatch-stock-update topic in AllocationService from OrderService " + order);
+		
+		allocationController.updateStock(order);	
 	}
 
 }

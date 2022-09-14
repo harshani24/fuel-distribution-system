@@ -1,5 +1,7 @@
 package com.fuel.allocationservice.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,9 @@ public class AllocationController {
 			producer.publishRejectionOfAllocation(orderResult);
 		}
 		
+	}
+	
+	public void updateStock(Order order) {
+		allocationService.updateStock(order);
 	}
 }

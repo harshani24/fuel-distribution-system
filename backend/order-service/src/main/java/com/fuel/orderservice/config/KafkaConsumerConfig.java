@@ -48,4 +48,3 @@ class KafkaConsumerConfig {
 		return factory;
 	}
 }
-

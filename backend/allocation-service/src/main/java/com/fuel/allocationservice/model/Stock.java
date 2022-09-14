@@ -23,21 +23,28 @@ public class Stock{
 	private String orderAllocationId;	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private LocalDate allocatedDate;
 	@JsonFormat(pattern = "HH:mm:ss")
-	private LocalTime time;
+	private LocalTime allocatedTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime dateTime;
+	private LocalDateTime allocatedDateTime;
 	
-	private int availableOcatane92;
-	private int allocatedOcatane92;
-	private int dispatchedOcatane92;
-	private String statusOcatane92;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dispatchedDate;
+	@JsonFormat(pattern = "HH:mm:ss")
+	private LocalTime dispatchedTime;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime dispatchedDateTime;
 	
-	private int availableOcatane95;
-	private int allocatedOcatane95;
-	private int dispatchedOcatane95;
-	private String statusOcatane95;
+	private int availableOctane92;
+	private int allocatedOctane92;
+	private int dispatchedOctane92;
+	private String statusOctane92;
+	
+	private int availableOctane95;
+	private int allocatedOctane95;
+	private int dispatchedOctane95;
+	private String statusOctane95;
 	
 	private int availableAutoDiesel;
 	private int allocatedAutoDiesel;
@@ -54,21 +61,25 @@ public class Stock{
 	public Stock clone() {
 		Stock stock = new Stock();
 		
-		stock.setAvailableOcatane92(availableOcatane92);
-		stock.setAllocatedOcatane92(allocatedOcatane92);
-		stock.setDispatchedOcatane92(dispatchedOcatane92);
+		stock.setAvailableOctane92(availableOctane92);
+		stock.setAllocatedOctane92(allocatedOctane92);
+		stock.setDispatchedOctane92(dispatchedOctane92);
+		stock.setStatusOctane92(statusOctane92);
 		
-		stock.setAvailableOcatane95(availableOcatane95);
-		stock.setAllocatedOcatane95(allocatedOcatane95);
-		stock.setDispatchedOcatane95(dispatchedOcatane95);
+		stock.setAvailableOctane95(availableOctane95);
+		stock.setAllocatedOctane95(allocatedOctane95);
+		stock.setDispatchedOctane95(dispatchedOctane95);
+		stock.setStatusOctane95(statusOctane95);
 		
 		stock.setAvailableAutoDiesel(availableAutoDiesel);
 		stock.setAllocatedAutoDiesel(allocatedAutoDiesel);
 		stock.setDispatchedAutoDiesel(dispatchedAutoDiesel);
+		stock.setStatusAutoDiesel(statusAutoDiesel);
 		
 		stock.setAvailableSuperDiesel(availableSuperDiesel);
 		stock.setAllocatedSuperDiesel(allocatedSuperDiesel);
 		stock.setDispatchedSuperDiesel(dispatchedSuperDiesel);
+		stock.setStatusSuperDiesel(statusSuperDiesel);
 		
 		return stock;
 	}

@@ -21,7 +21,7 @@ public interface OrderService {
 	
 	ScheduleDTO addScheduledDate(Order order);
 	
-	void changeDispatchStatus(String orderId);
+	Order changeDispatchStatus(String orderId);
 
 	List<Order> viewAllMyOrders(String passport);
 
