@@ -1,0 +1,64 @@
+<div>
+    <br/><br/><br/>
+    <div [ngStyle] ="{padding:'10px 30px'}">
+        <h2>Stock Details</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered border-dark table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Stock ID</th>
+                        <th>Order ID</th>
+                        <th>OrderAllocation Ref</th>
+                        <th>Allocated Time</th>
+                        <th>dispatched Time</th>
+                        <th>Available Octane92</th>
+                        <th>Allocated Octane92</th>
+                        <th>Dispatched Octane92(L)</th>
+                        <th>Status Octane92</th>
+                        <th>Available Octane95</th>
+                        <th>Allocated Octane95</th>
+                        <th>Dispatched Octane95(L)</th>
+                        <th>Status Octane95</th>
+                        <th>Available AutoDiesel</th>
+                        <th>Allocated AutoDiesel</th>
+                        <th>Dispatched AutoDiesel(L)</th>
+                        <th>Status AutoDiesel</th>
+                        <th>Available SuperDiesel</th>
+                        <th>Allocated SuperDiesel</th>
+                        <th>Dispatched SuperDiesel(L)</th>
+                        <th>Status SuperDiesel</th>
+                    </tr>
+
+                </thead> 
+
+                <tbody>
+                    <tr *ngFor="let stock of stocks" >
+                        <td>{{stock.id}}</td>
+                        <td>{{stock.orderId}}</td>
+                        <td>{{stock.orderAllocationId}}</td>
+                        <td>{{stock.allocatedDateTime}}</td>
+                        <td>{{stock.dispatchedDateTime}}</td>
+                        <td>{{stock.availableOctane92}}</td>
+                        <td>{{stock.allocatedOctane92}}</td>
+                        <td>{{stock.dispatchedOctane92}}</td>
+                        <td>{{stock.statusOctane92}}</td>
+                        <td>{{stock.availableOctane95}}</td>
+                        <td>{{stock.allocatedOctane95}}</td>
+                        <td>{{stock.dispatchedOctane95}}</td>
+                        <td>{{stock.statusOctane95}}</td>
+                        <td>{{stock.availableAutoDiesel}}</td>
+                        <td>{{stock.allocatedAutoDiesel}}</td>
+                        <td>{{stock.dispatchedAutoDiesel}}</td>
+                        <td>{{stock.statusAutoDiesel}}</td>
+                        <td>{{stock.availableSuperDiesel}}</td>
+                        <td>{{stock.allocatedSuperDiesel}}</td>
+                        <td>{{stock.dispatchedSuperDiesel}}</td>
+                        <td>{{stock.statusSuperDiesel}}</td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

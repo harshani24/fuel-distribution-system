@@ -42,7 +42,7 @@ public class AllocationServiceImpl implements AllocationService{
 			initialStock.setAllocatedTime(currentDateTime.toLocalTime());
 			initialStock.setAllocatedDate(currentDateTime.toLocalDate());
 			initialStock.setAllocatedDateTime(currentDateTime);
-			
+			initialStock.setDateTime(currentDateTime);
 			
 			initialStock.setAvailableOctane92(octane92);
 			initialStock.setAvailableOctane95(octane95);
@@ -69,6 +69,7 @@ public class AllocationServiceImpl implements AllocationService{
 			newStock.setAllocatedTime(currentDateTime.toLocalTime());
 			newStock.setAllocatedDate(currentDateTime.toLocalDate());
 			newStock.setAllocatedDateTime(currentDateTime);
+			newStock.setDateTime(currentDateTime);
 			
 			newStock.setAvailableOctane92(stock.getAvailableOctane92()+octane92);
 			newStock.setAvailableOctane95(stock.getAvailableOctane95()+octane95);
@@ -191,7 +192,8 @@ public class AllocationServiceImpl implements AllocationService{
 			newStockRecord.setOrderAllocationId(newOrder.getId());
 			newStockRecord.setAllocatedTime(newOrder.getAllocatedTime());
 			newStockRecord.setAllocatedDate(newOrder.getAllocatedDate());
-			newStockRecord.setAllocatedDateTime(newOrder.getAllocatedDateTime());		
+			newStockRecord.setAllocatedDateTime(newOrder.getAllocatedDateTime());	
+			newStockRecord.setDateTime(currentDateTime);
 			
 			stockAllocationRepository.save( newStockRecord);
 			
@@ -285,6 +287,7 @@ public class AllocationServiceImpl implements AllocationService{
 	public List<Stock> findAllStockDesc() {
 		
 		return stockAllocationRepository.findAllByOrderByDateTimeDesc();
+		//return stockAllocationRepository.findTop20ByOrderByDateTimeDesc();
 	}
 
 	
@@ -384,6 +387,7 @@ public class AllocationServiceImpl implements AllocationService{
 		lastStockRecord.setDispatchedDate(currentDateTime.toLocalDate());
 		lastStockRecord.setDispatchedTime(currentDateTime.toLocalTime());
 		lastStockRecord.setDispatchedDateTime(currentDateTime);
+		lastStockRecord.setDateTime(currentDateTime);
 		
 		return lastStockRecord;
 	}

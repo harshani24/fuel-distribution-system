@@ -36,6 +36,9 @@ public class Stock{
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime dispatchedDateTime;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime DateTime;
+	
 	private int availableOctane92;
 	private int allocatedOctane92;
 	private int dispatchedOctane92;

@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { DispatchComponent } from './components/dispatch/dispatch.component';
+import { StockComponent } from './components/stock/stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderListComponent,
-    DispatchComponent
+    DispatchComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,

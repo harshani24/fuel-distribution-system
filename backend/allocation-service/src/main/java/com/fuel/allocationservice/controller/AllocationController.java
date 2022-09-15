@@ -22,7 +22,7 @@ public class AllocationController {
 	@Autowired
 	Producer producer;
 	
-	@RequestMapping("/")
+	@RequestMapping("/stocks")
 	public List<Stock> findAllStockDesc() {
 		return allocationService.findAllStockDesc();
 	}

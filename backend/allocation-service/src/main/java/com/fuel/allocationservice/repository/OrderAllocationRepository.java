@@ -9,5 +9,5 @@ public interface OrderAllocationRepository extends MongoRepository<OrderAllocati
 
 	OrderAllocation findByOrderId(String orderId);
 	
-	OrderAllocation findTopByOrderByDateTimeDesc();
+	//OrderAllocation findTopByOrderByDateTimeDesc();
 }
