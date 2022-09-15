@@ -5,13 +5,12 @@
         <button class='btn btn-warning' [ngStyle]="{width: '150px',marginRight: '10px'}" (click)="stockDetails()"> Latest Stock Details </button>
         <button class='btn btn-primary' [ngStyle]="{width: '150px',marginRight: '10px'}" (click)="orderAllocationDetails()"> Order Allocation Details </button>
         <button class='btn btn-primary' [ngStyle]="{width: '150px'}" (click)="allDetails()"> All Allocation Details </button>
-        <br/>
+        <br/><br/>
 
 
         <div *ngIf="stock">
 
-         <h3>Latest Stock Details</h3>       
-         <h6>(Latest record in the First row)</h6>
+         <h3>Latest Stock Details</h3> <h6>(Latest record in the First row)</h6>
 
         <div class="table-responsive">
             <table class="table table-bordered border-dark table-hover">
@@ -70,6 +69,7 @@
                 </tbody>
             </table>
         </div>
+        <br/><br/>
     </div>
 
     <div *ngIf="orderAllocation">

@@ -389,6 +389,8 @@ public class AllocationServiceImpl implements AllocationService{
 		lastStockRecord.setDispatchedDateTime(currentDateTime);
 		lastStockRecord.setTime(currentDateTime);
 		
+		stockAllocationRepository.save(lastStockRecord);
+		
 		return lastStockRecord;
 	}
 

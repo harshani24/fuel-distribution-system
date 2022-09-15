@@ -12,8 +12,8 @@ export class StockComponent implements OnInit {
  
   stocks : Stock[] = [];
   orderAllocations : OrderAllocation[] = [];
-  stock : boolean = false;
-  orderAllocation : boolean = false;
+  stock : boolean = true;
+  orderAllocation : boolean = true;
 
 
   constructor(private stockService : StockService) { } 
