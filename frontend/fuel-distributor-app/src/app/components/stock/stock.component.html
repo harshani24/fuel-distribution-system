@@ -1,7 +1,17 @@
 <div>
     <br/><br/><br/>
     <div [ngStyle] ="{padding:'10px 30px'}">
-        <h2>Stock Details</h2>
+        <h2>Stock & Allocation Details</h2>
+        <button class='btn btn-warning' [ngStyle]="{width: '150px',marginRight: '10px'}" (click)="stockDetails()"> Latest Stock Details </button>
+        <button class='btn btn-primary' [ngStyle]="{width: '150px',marginRight: '10px'}" (click)="orderAllocationDetails()"> Order Allocation Details </button>
+        <button class='btn btn-primary' [ngStyle]="{width: '150px'}" (click)="allDetails()"> All Allocation Details </button>
+        <br/>
+
+
+        <div *ngIf="stock">
+
+         <h3>Latest Stock Details</h3>       
+         <h6>(Latest record in the First row)</h6>
 
         <div class="table-responsive">
             <table class="table table-bordered border-dark table-hover">
@@ -60,5 +70,60 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div *ngIf="orderAllocation">
+
+        <h3>Order Allocation Details</h3>       
+
+       <div class="table-responsive">
+           <table class="table table-bordered border-dark table-hover">
+               <thead class="table-dark">
+                   <tr>
+                       <th>ID</th>
+                       <th>Order ID</th>
+                       <th>Allocated Time</th>
+                       <th>dispatched Time</th>
+                       <th>Allocated Octane92</th>
+                       <th>Dispatched Octane92(L)</th>
+                       <th>Status Octane92</th>
+                       <th>Allocated Octane95</th>
+                       <th>Dispatched Octane95(L)</th>
+                       <th>Status Octane95</th>
+                       <th>Allocated AutoDiesel</th>
+                       <th>Dispatched AutoDiesel(L)</th>
+                       <th>Status AutoDiesel</th>
+                       <th>Allocated SuperDiesel</th>
+                       <th>Dispatched SuperDiesel(L)</th>
+                       <th>Status SuperDiesel</th>
+                   </tr>
+
+               </thead> 
+
+               <tbody>
+                   <tr *ngFor="let oAllocation of orderAllocations" >
+                       <td>{{oAllocation.id}}</td>
+                       <td>{{oAllocation.orderId}}</td>
+                       <td>{{oAllocation.allocatedDateTime}}</td>
+                       <td>{{oAllocation.dispatchedDateTime}}</td>
+                       <td>{{oAllocation.allocatedOctane92}}</td>
+                       <td>{{oAllocation.dispatchedOctane92}}</td>
+                       <td>{{oAllocation.statusOctane92}}</td>
+                       <td>{{oAllocation.allocatedOctane95}}</td>
+                       <td>{{oAllocation.dispatchedOctane95}}</td>
+                       <td>{{oAllocation.statusOctane95}}</td>
+                       <td>{{oAllocation.allocatedAutoDiesel}}</td>
+                       <td>{{oAllocation.dispatchedAutoDiesel}}</td>
+                       <td>{{oAllocation.statusAutoDiesel}}</td>
+                       <td>{{oAllocation.allocatedSuperDiesel}}</td>
+                       <td>{{oAllocation.dispatchedSuperDiesel}}</td>
+                       <td>{{oAllocation.statusSuperDiesel}}</td>
+                      
+                   </tr>
+               </tbody>
+           </table>
+       </div>
+   </div>
+
     </div>
 </div>

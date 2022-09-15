@@ -136,7 +136,7 @@ public class OrderServiceImpl implements OrderService{
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			
 			order.setRejected(true);
-			order.setScheduledTime(currentDateTime);
+			order.setRejectedTime(currentDateTime);
 			
 			order.setStatus("rejected");
 			order.setStatusTime(currentDateTime.toLocalTime());			

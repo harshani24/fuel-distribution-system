@@ -1,13 +1,13 @@
 package com.fuel.allocationservice.controller;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fuel.allocationservice.model.OrderAllocation;
 import com.fuel.allocationservice.model.Stock;
 import com.fuel.allocationservice.service.AllocationService;
 import com.fuel.allocationservice.service.Producer;
@@ -22,11 +22,18 @@ public class AllocationController {
 	@Autowired
 	Producer producer;
 	
+	@CrossOrigin
 	@RequestMapping("/stocks")
 	public List<Stock> findAllStockDesc() {
 		return allocationService.findAllStockDesc();
 	}
 	
+	
+	@CrossOrigin
+	@RequestMapping("/order-allocations")
+	public List<OrderAllocation> findAllOrderAllocation() {
+		return allocationService.findAllOrderAllocation();
+	}
 	
 	public Stock addStock(int octane92, int octane95, int autoDiesel , int superDiesel) {
 		return allocationService.addStock(octane92, octane95, autoDiesel, superDiesel);

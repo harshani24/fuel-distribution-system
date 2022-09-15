@@ -56,7 +56,7 @@ const AddOrder = () => {
     return (
         <div style={{outlineStyle:"solid", width:"75%" ,height:"100%", padding:"30px 40px"}}>
             
-            {errorMsg ? <div class="alert alert-danger" role="alert">
+            {errorMsg ? <div className="alert alert-danger" role="alert">
                     Please select at least on fuel types to make order!
                 </div> : null}
 

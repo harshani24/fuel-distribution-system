@@ -16,6 +16,8 @@ public interface AllocationService {
 	List<Stock> findAllStockDesc();
 	
 	void updateStock(Order order);
+
+	List<OrderAllocation> findAllOrderAllocation();
 	
 	//OrderAllocation findAllocationRecordByOrderID(Order order);
 

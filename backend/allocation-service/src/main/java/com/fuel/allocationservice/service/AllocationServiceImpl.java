@@ -42,7 +42,7 @@ public class AllocationServiceImpl implements AllocationService{
 			initialStock.setAllocatedTime(currentDateTime.toLocalTime());
 			initialStock.setAllocatedDate(currentDateTime.toLocalDate());
 			initialStock.setAllocatedDateTime(currentDateTime);
-			initialStock.setDateTime(currentDateTime);
+			initialStock.setTime(currentDateTime);
 			
 			initialStock.setAvailableOctane92(octane92);
 			initialStock.setAvailableOctane95(octane95);
@@ -69,7 +69,7 @@ public class AllocationServiceImpl implements AllocationService{
 			newStock.setAllocatedTime(currentDateTime.toLocalTime());
 			newStock.setAllocatedDate(currentDateTime.toLocalDate());
 			newStock.setAllocatedDateTime(currentDateTime);
-			newStock.setDateTime(currentDateTime);
+			newStock.setTime(currentDateTime);
 			
 			newStock.setAvailableOctane92(stock.getAvailableOctane92()+octane92);
 			newStock.setAvailableOctane95(stock.getAvailableOctane95()+octane95);
@@ -193,9 +193,9 @@ public class AllocationServiceImpl implements AllocationService{
 			newStockRecord.setAllocatedTime(newOrder.getAllocatedTime());
 			newStockRecord.setAllocatedDate(newOrder.getAllocatedDate());
 			newStockRecord.setAllocatedDateTime(newOrder.getAllocatedDateTime());	
-			newStockRecord.setDateTime(currentDateTime);
+			newStockRecord.setTime(currentDateTime);
 			
-			stockAllocationRepository.save( newStockRecord);
+			stockAllocationRepository.save(newStockRecord);
 			
 			order.setAllocated(true);
 		    order.setAllocatedTime(newOrder.getAllocatedDateTime());
@@ -271,8 +271,8 @@ public class AllocationServiceImpl implements AllocationService{
 
 	//----------------------------------------------------other-------------------------------------------------------------------
 	public Stock getLastStockRecord() {
-		  Stock stock = stockAllocationRepository.findFirstByOrderByDateTimeDesc();
-		  
+		  Stock stock = stockAllocationRepository.findFirstByOrderByTimeDesc();
+	
 		  if(stock == null) {
 			  return null;
 		  }
@@ -286,8 +286,8 @@ public class AllocationServiceImpl implements AllocationService{
 	@Override
 	public List<Stock> findAllStockDesc() {
 		
-		return stockAllocationRepository.findAllByOrderByDateTimeDesc();
-		//return stockAllocationRepository.findTop20ByOrderByDateTimeDesc();
+		return stockAllocationRepository.findAllByOrderByTimeDesc();
+		//return stockAllocationRepository.findTop20ByOrderByTimeDesc();
 	}
 
 	
@@ -387,9 +387,18 @@ public class AllocationServiceImpl implements AllocationService{
 		lastStockRecord.setDispatchedDate(currentDateTime.toLocalDate());
 		lastStockRecord.setDispatchedTime(currentDateTime.toLocalTime());
 		lastStockRecord.setDispatchedDateTime(currentDateTime);
-		lastStockRecord.setDateTime(currentDateTime);
+		lastStockRecord.setTime(currentDateTime);
 		
 		return lastStockRecord;
+	}
+
+
+
+
+	@Override
+	public List<OrderAllocation> findAllOrderAllocation() {
+		
+		return orderAllocationRepository.findAll();
 	}
 
 	
